@@ -1,4 +1,4 @@
-import type { Locale } from '~/types/portfolio'
+import type { Locale } from '#shared/types/portfolio'
 
 export function usePortfolioLocale() {
   const { locale } = useI18n()

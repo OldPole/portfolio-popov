@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowUpRight } from '@lucide/vue'
-import { projects } from '~/data/projects'
+import { projects } from '#shared/data/projects'
 import { profile } from '~/data/profile'
 const { t } = useI18n()
 </script>

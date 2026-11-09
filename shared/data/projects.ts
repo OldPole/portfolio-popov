@@ -1,4 +1,4 @@
-import type { Project } from '~/types/portfolio'
+import type { Project } from '../types/portfolio'
 
 export const projects: Project[] = [
   {
@@ -30,7 +30,9 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Vite', 'WebSocket'],
     repository: 'https://github.com/lamerous/AlignedHearts',
     image: '/images/projects/aligned-hearts.png',
-    gallery: ['/images/projects/aligned-hearts-room.png'],
+    imageWidth: 1894,
+    imageHeight: 1044,
+    gallery: [{ src: '/images/projects/aligned-hearts-room.png', width: 1475, height: 892 }],
   },
   {
     slug: 'next-ecommerce',
@@ -62,6 +64,8 @@ export const projects: Project[] = [
     repository: 'https://github.com/OldPole/Next-Ecommerce',
     demo: 'https://next-ecommerce-beta-virid.vercel.app',
     image: '/images/projects/next-ecommerce.jpg',
+    imageWidth: 1265,
+    imageHeight: 712,
   },
   {
     slug: 'seriespoisk',
@@ -93,26 +97,7 @@ export const projects: Project[] = [
     repository: 'https://github.com/OldPole/React-Series-Poisk',
     demo: 'https://seriespoisk.netlify.app',
     image: '/images/projects/seriespoisk.jpg',
-  },
-  {
-    slug: 'my-dorm',
-    name: 'My Dorm',
-    year: '',
-    accent: '#dbe4fa',
-    category: { en: 'Frontend · Team project', ru: 'Фронтенд · Командный проект' },
-    description: {
-      en: 'A collaborative project where I worked on the frontend application.',
-      ru: 'Командный проект, в котором я занимался фронтенд-частью приложения.',
-    },
-    contribution: {
-      en: 'I worked on the frontend part of the project. The repository is maintained by the project author on a separate GitHub account.',
-      ru: 'Я занимался фронтенд-частью проекта. Репозиторий находится в GitHub-аккаунте автора проекта.',
-    },
-    highlights: {
-      en: ['Frontend development', 'Team collaboration'],
-      ru: ['Разработка фронтенда', 'Командная работа'],
-    },
-    stack: [],
-    repository: 'https://github.com/lamerous/my_dorm',
+    imageWidth: 1265,
+    imageHeight: 712,
   },
 ]

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowDown, ArrowDownRight, ArrowUpRight, Download, MapPin } from '@lucide/vue'
+import { ArrowDown, ArrowUpRight, Download, MapPin } from '@lucide/vue'
 import { profile } from '~/data/profile'
 const { t } = useI18n()
 </script>
@@ -29,10 +29,20 @@ const { t } = useI18n()
           </div>
         </div>
         <aside class="hero-aside">
-          <div class="monogram" aria-hidden="true">
-            <span>kp<span class="accent">.</span></span
-            ><ArrowDownRight class="monogram-arrow" :size="38" :stroke-width="1.1" />
-          </div>
+          <figure class="hero-portrait">
+            <NuxtImg
+              src="/images/kirill-popov.webp"
+              :alt="t('hero.portrait')"
+              width="768"
+              height="1026"
+              sizes="140px sm:190px md:260px xl:290px"
+              format="webp"
+              quality="84"
+              loading="eager"
+              fetchpriority="high"
+              preload
+            />
+          </figure>
           <div class="identity-row">
             <span>{{ t('hero.focus') }}</span
             ><strong>{{ t('hero.focusValue') }}</strong>

@@ -41,7 +41,7 @@ const links = computed(() => [
       <NuxtLink
         :to="switchLocalePath(otherLocale)"
         class="language-toggle"
-        :aria-label="t('common.language')"
+        :aria-label="`${otherLocale.toUpperCase()} — ${t('common.language')}`"
         >{{ otherLocale.toUpperCase() }}</NuxtLink
       >
       <ClientOnly>

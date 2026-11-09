@@ -35,7 +35,8 @@
     "approach": "My approach",
     "approachValue": "Build. Refine. Ship.",
     "scroll": "A little more about me",
-    "index": "Personal portfolio / 2026"
+    "index": "Personal portfolio / 2026",
+    "portrait": "Portrait of Kirill Popov"
   },
   "experience": {
     "eyebrow": "01 / My journey",
@@ -71,10 +72,6 @@
     "contribution": "My contribution",
     "highlights": "What it includes",
     "stack": "Built with",
-    "previewPending": "Project preview",
-    "previewNote": "Frontend · Collaborative work",
-    "noPreview": "Screenshots are not available yet.",
-    "repositoryUnavailable": "The repository link is currently unavailable publicly. Details and screenshots will be added when access is available.",
     "next": "Next project"
   },
   "contact": {

@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from '@lucide/vue'
-import { projects } from '~/data/projects'
+import { projects } from '#shared/data/projects'
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
+import { usePortfolioSeo } from '~/composables/usePortfolioSeo'
 const route = useRoute()
 const { t } = useI18n()
 const lang = usePortfolioLocale()
 const localePath = useLocalePath()
 const project = computed(() => projects.find((item) => item.slug === route.params.slug))
 if (!project.value) throw createError({ statusCode: 404, statusMessage: 'Project not found' })
-useSeoMeta({
+usePortfolioSeo({
   title: () => `${project.value?.name} — Kirill Popov`,
-  description: () => project.value?.description[lang.value],
+  description: () => project.value?.description[lang.value] || '',
+  image: () => project.value?.image || '/images/portfolio-social.jpg',
+  imageWidth: () => project.value?.imageWidth || 1200,
+  imageHeight: () => project.value?.imageHeight || 630,
 })
 </script>
 
@@ -27,7 +31,6 @@ useSeoMeta({
       <p class="project-lead">{{ project.description[lang] }}</p>
       <div class="project-page-actions">
         <a
-          v-if="project.slug !== 'my-dorm'"
           :href="project.repository"
           class="button button-outline"
           target="_blank"
@@ -44,17 +47,17 @@ useSeoMeta({
         /></a>
       </div>
     </div>
-    <div v-if="project.image" class="project-detail-image" :style="{ background: project.accent }">
+    <div class="project-detail-image" :style="{ background: project.accent }">
       <NuxtImg
         :src="project.image"
         :alt="t('common.screenshot', { name: project.name })"
-        width="1264"
+        :width="project.imageWidth"
+        :height="project.imageHeight"
         sizes="sm:100vw lg:1200px"
         format="webp"
         preload
       />
     </div>
-    <p v-else class="project-unavailable">{{ t('projects.repositoryUnavailable') }}</p>
     <div class="project-body">
       <div>
         <p class="eyebrow">{{ t('projects.contribution') }}</p>
@@ -74,11 +77,12 @@ useSeoMeta({
         </div>
       </aside>
     </div>
-    <div v-for="image in project.gallery" :key="image" class="project-gallery-image">
+    <div v-for="image in project.gallery" :key="image.src" class="project-gallery-image">
       <NuxtImg
-        :src="image"
+        :src="image.src"
         :alt="t('common.screenshot', { name: project.name })"
-        width="1264"
+        :width="image.width"
+        :height="image.height"
         sizes="sm:100vw lg:1200px"
         format="webp"
         loading="lazy"

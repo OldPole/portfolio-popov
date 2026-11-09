@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowUpRight, ExternalLink } from '@lucide/vue'
-import type { Project } from '~/types/portfolio'
+import type { Project } from '#shared/types/portfolio'
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
 defineProps<{ project: Project; index: number }>()
 const { t } = useI18n()
@@ -16,24 +16,19 @@ const lang = usePortfolioLocale()
       :style="{ '--project-accent': project.accent }"
       :aria-label="`${project.name} — ${t('common.details')}`"
     >
-      <div v-if="project.image" class="project-browser">
+      <div class="project-browser">
         <div class="browser-chrome" aria-hidden="true">
-          <span /><span /><span /><i>{{ project.name.toLowerCase().replaceAll(' ', '') }} /</i>
+          <span /><span /><span /><i>{{ project.name }}</i>
         </div>
         <NuxtImg
           :src="project.image"
           :alt="t('common.screenshot', { name: project.name })"
-          width="1264"
-          height="712"
+          :width="project.imageWidth"
+          :height="project.imageHeight"
           sizes="sm:100vw md:50vw lg:600px"
           loading="lazy"
           format="webp"
         />
-      </div>
-      <div v-else class="project-placeholder">
-        <span class="dorm-mark" aria-hidden="true">md<span>↗</span></span
-        ><span class="placeholder-title">{{ project.name }}</span
-        ><span class="placeholder-caption">{{ t('projects.previewNote') }}</span>
       </div>
       <span class="project-hover-arrow" aria-hidden="true"><ArrowUpRight :size="22" /></span>
     </NuxtLink>
@@ -54,7 +49,6 @@ const lang = usePortfolioLocale()
       <NuxtLink :to="localePath(`/projects/${project.slug}`)" class="text-link"
         >{{ t('common.details') }}<ArrowUpRight :size="14" aria-hidden="true" /></NuxtLink
       ><a
-        v-if="project.slug !== 'my-dorm'"
         :href="project.repository"
         target="_blank"
         rel="noopener noreferrer"

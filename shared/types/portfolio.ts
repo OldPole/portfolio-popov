@@ -12,7 +12,9 @@ export interface Project {
   stack: string[]
   repository: string
   demo?: string
-  image?: string
-  gallery?: string[]
+  image: string
+  imageWidth: number
+  imageHeight: number
+  gallery?: { src: string; width: number; height: number }[]
   accent: string
 }
