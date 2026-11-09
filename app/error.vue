@@ -15,8 +15,8 @@ const isRussian = computed(() => useRequestURL().pathname.startsWith('/ru'))
           : 'The page may have moved or does not exist.'
       }}
     </p>
-    <a :href="isRussian ? '/ru' : '/en'" class="button"
-      >{{ isRussian ? 'На главную' : 'Back to home' }} ↗</a
-    >
+    <UiButton :href="isRussian ? '/ru' : '/en'">
+      {{ isRussian ? 'На главную' : 'Back to home' }} ↗
+    </UiButton>
   </div>
 </template>

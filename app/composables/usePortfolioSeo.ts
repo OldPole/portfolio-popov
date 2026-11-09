@@ -40,7 +40,9 @@ export function usePortfolioSeo(options: {
   })
 
   useHead(() => {
-    if (!origin.value) return {}
+    if (!origin.value) {
+      return {}
+    }
     const pagePath = route.path.replace(/^\/(en|ru)(?=\/|$)/, '')
     return {
       link: [

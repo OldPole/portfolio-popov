@@ -2,7 +2,9 @@
 import { ArrowUpRight, ExternalLink } from '@lucide/vue'
 import type { Project } from '#shared/types/portfolio'
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
-defineProps<{ project: Project; index: number }>()
+withDefaults(defineProps<{ project: Project; index: number; headingTag?: 'h2' | 'h3' }>(), {
+  headingTag: 'h3',
+})
 const { t } = useI18n()
 const localePath = useLocalePath()
 const lang = usePortfolioLocale()
@@ -17,8 +19,14 @@ const lang = usePortfolioLocale()
       :aria-label="`${project.name} — ${t('common.details')}`"
     >
       <div class="project-browser">
-        <div class="browser-chrome" aria-hidden="true">
-          <span /><span /><span /><i>{{ project.name }}</i>
+        <div
+          class="browser-chrome"
+          aria-hidden="true"
+        >
+          <span />
+          <span />
+          <span />
+          <i>{{ project.name }}</i>
         </div>
         <NuxtImg
           :src="project.image"
@@ -30,39 +38,80 @@ const lang = usePortfolioLocale()
           format="webp"
         />
       </div>
-      <span class="project-hover-arrow" aria-hidden="true"><ArrowUpRight :size="22" /></span>
+      <span
+        class="project-hover-arrow"
+        aria-hidden="true"
+      >
+        <ArrowUpRight :size="22" />
+      </span>
     </NuxtLink>
     <div class="project-meta">
-      <span>{{ String(index + 1).padStart(2, '0') }} / {{ project.category[lang] }}</span
-      ><span>{{ project.year }}</span>
+      <span>{{ String(index + 1).padStart(2, '0') }} / {{ project.category[lang] }}</span>
+      <span>{{ project.year }}</span>
     </div>
-    <h3>
-      <NuxtLink :to="localePath(`/projects/${project.slug}`)"
-        >{{ project.name }}<ArrowUpRight :size="22" aria-hidden="true"
-      /></NuxtLink>
-    </h3>
+    <component :is="headingTag">
+      <NuxtLink :to="localePath(`/projects/${project.slug}`)">
+        {{ project.name }}
+        <ArrowUpRight
+          :size="22"
+          aria-hidden="true"
+        />
+      </NuxtLink>
+    </component>
     <p class="project-description">{{ project.description[lang] }}</p>
-    <div v-if="project.stack.length" class="tag-list project-tags">
-      <span v-for="tag in project.stack" :key="tag" class="tag tag-subtle">{{ tag }}</span>
+    <div
+      v-if="project.stack.length"
+      class="tag-list project-tags"
+    >
+      <span
+        v-for="tag in project.stack"
+        :key="tag"
+        class="tag tag-subtle"
+      >
+        {{ tag }}
+      </span>
     </div>
     <div class="project-actions">
-      <NuxtLink :to="localePath(`/projects/${project.slug}`)" class="text-link"
-        >{{ t('common.details') }}<ArrowUpRight :size="14" aria-hidden="true" /></NuxtLink
-      ><a
+      <UiButton
+        :to="localePath(`/projects/${project.slug}`)"
+        variant="text"
+        size="small"
+      >
+        {{ t('common.details') }}
+        <ArrowUpRight
+          :size="14"
+          aria-hidden="true"
+        />
+      </UiButton>
+      <UiButton
         :href="project.repository"
         target="_blank"
         rel="noopener noreferrer"
-        class="icon-button"
+        variant="ghost"
+        size="icon"
         :aria-label="`${project.name}: ${t('common.viewCode')}`"
-        ><UiSocialIcon name="github" :size="17" aria-hidden="true" /></a
-      ><a
+      >
+        <UiSocialIcon
+          name="github"
+          :size="17"
+          aria-hidden="true"
+        />
+      </UiButton>
+      <UiButton
         v-if="project.demo"
         :href="project.demo"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-link demo-link"
-        >{{ t('common.liveDemo') }}<ExternalLink :size="13" aria-hidden="true"
-      /></a>
+        variant="text"
+        size="small"
+        class="demo-link"
+      >
+        {{ t('common.liveDemo') }}
+        <ExternalLink
+          :size="13"
+          aria-hidden="true"
+        />
+      </UiButton>
     </div>
   </article>
 </template>

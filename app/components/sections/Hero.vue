@@ -1,31 +1,58 @@
 <script setup lang="ts">
-import { ArrowDown, ArrowUpRight, Download, MapPin } from '@lucide/vue'
+import { ArrowUpRight, Download, MapPin, Send } from '@lucide/vue'
 import { profile } from '~/data/profile'
 const { t } = useI18n()
+const localePath = useLocalePath()
 </script>
 
 <template>
-  <section class="hero-panel" aria-labelledby="hero-title">
+  <section
+    class="hero-panel"
+    aria-labelledby="hero-title"
+  >
     <div class="container hero-inner">
       <div class="hero-topline">
-        <span class="small-label">{{ t('hero.index') }}</span
-        ><span class="location"
-          ><MapPin :size="12" aria-hidden="true" />{{ t('hero.location') }}</span
-        >
+        <span class="small-label">{{ t('hero.index') }}</span>
+        <span class="location">
+          <MapPin
+            :size="12"
+            aria-hidden="true"
+          />
+          {{ t('hero.location') }}
+        </span>
       </div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="hero-greeting"><span class="hello-dot" />{{ t('hero.eyebrow') }}</p>
-          <h1 id="hero-title">{{ t('hero.title') }}<span class="accent">.</span></h1>
+          <p class="hero-greeting">
+            <span class="hello-dot" />
+            {{ t('hero.eyebrow') }}
+          </p>
+          <h1 id="hero-title">
+            {{ t('hero.title') }}
+            <span class="accent">.</span>
+          </h1>
           <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
           <p class="hero-description">{{ t('hero.description') }}</p>
           <p class="hero-description secondary-description">{{ t('hero.description2') }}</p>
           <div class="hero-buttons">
-            <a href="#projects" class="button"
-              >{{ t('hero.work') }}<ArrowUpRight :size="17" aria-hidden="true" /></a
-            ><a :href="profile.cv" download class="button button-outline"
-              >{{ t('common.download') }}<Download :size="16" aria-hidden="true"
-            /></a>
+            <UiButton :to="localePath('/projects')">
+              {{ t('hero.work') }}
+              <ArrowUpRight
+                :size="17"
+                aria-hidden="true"
+              />
+            </UiButton>
+            <UiButton
+              :href="profile.cv"
+              download
+              variant="outline"
+            >
+              {{ t('common.download') }}
+              <Download
+                :size="16"
+                aria-hidden="true"
+              />
+            </UiButton>
           </div>
         </div>
         <aside class="hero-aside">
@@ -44,27 +71,60 @@ const { t } = useI18n()
             />
           </figure>
           <div class="identity-row">
-            <span>{{ t('hero.focus') }}</span
-            ><strong>{{ t('hero.focusValue') }}</strong>
-          </div>
-          <div class="identity-row">
-            <span>{{ t('hero.approach') }}</span
-            ><strong>{{ t('hero.approachValue') }}</strong>
+            <span>{{ t('hero.focus') }}</span>
+            <strong>{{ t('hero.focusValue') }}</strong>
           </div>
           <div class="hero-socials">
-            <a :href="profile.github" target="_blank" rel="noopener noreferrer"
-              ><UiSocialIcon name="github" :size="15" aria-hidden="true" />GitHub
-              <ArrowUpRight :size="13" aria-hidden="true" /></a
-            ><a :href="profile.linkedin" target="_blank" rel="noopener noreferrer"
-              ><UiSocialIcon name="linkedin" :size="15" aria-hidden="true" />LinkedIn
-              <ArrowUpRight :size="13" aria-hidden="true"
-            /></a>
+            <a
+              :href="profile.github"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <UiSocialIcon
+                name="github"
+                :size="15"
+                aria-hidden="true"
+              />
+              GitHub
+              <ArrowUpRight
+                :size="13"
+                aria-hidden="true"
+              />
+            </a>
+            <a
+              :href="profile.linkedin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <UiSocialIcon
+                name="linkedin"
+                :size="15"
+                aria-hidden="true"
+              />
+              LinkedIn
+              <ArrowUpRight
+                :size="13"
+                aria-hidden="true"
+              />
+            </a>
+            <a
+              :href="profile.telegram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Send
+                :size="15"
+                aria-hidden="true"
+              />
+              @OldPoleh
+              <ArrowUpRight
+                :size="13"
+                aria-hidden="true"
+              />
+            </a>
           </div>
         </aside>
       </div>
-      <a class="hero-scroll" href="#experience"
-        ><ArrowDown :size="14" aria-hidden="true" />{{ t('hero.scroll') }}</a
-      >
     </div>
   </section>
 </template>

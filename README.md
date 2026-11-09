@@ -31,6 +31,8 @@ npm start
 
 ```powershell
 npm run typecheck
+npm run lint
+npm run format:check
 npm run build
 npm run preview
 ```
@@ -46,10 +48,19 @@ npm run preview
 | `npm run preview`           | Просмотр production-сборки              |
 | `npm run typecheck`         | Проверка типов                          |
 | `npm run lint`              | Проверка ESLint                         |
+| `npm run lint:fix`          | Исправление ошибок ESLint               |
 | `npm run format`            | Форматирование                          |
 | `npm run format:check`      | Проверка форматирования                 |
 
-Автотесты по текущим требованиям не добавлены. GitHub Actions проверяет типы и сборку, без деплоя.
+Автотесты по текущим требованиям не добавлены. GitHub Actions проверяет ESLint, форматирование, типы и сборку, без деплоя.
+
+Prettier отвечает за форматирование: отступы в два пробела, один атрибут на строку в Vue, LF и читаемые HTML-теги без переноса закрывающей скобки в соседний элемент. ESLint проверяет ошибки JavaScript, TypeScript и Vue; `eslint-config-prettier` отключает конфликтующие правила оформления. `.editorconfig` задаёт общие настройки редактора. Для исправления кода запускайте `npm run lint:fix`, затем `npm run format`.
+
+## Страницы и компоненты
+
+Навигация открывает отдельные страницы `/en/experience`, `/en/projects`, `/en/contact` и их русские версии `/ru/...`. На каждой есть общие Header и Footer; страница опыта включает навыки и образование. Главная сохраняет порядок Hero → Experience → Skills → Projects → Contact.
+
+`components/ui/Button.vue` используется для действий, ссылок-кнопок и иконок. Варианты: `primary`, `outline`, `ghost`, `text`; размеры: `default`, `small`, `icon`. Компонент выводит `NuxtLink` для `to`, обычную ссылку для `href` и нативную кнопку для действий. Hover, клавиатурный фокус и курсор заданы общими стилями.
 
 ## Контактная форма
 
@@ -76,10 +87,10 @@ NUXT_CONTACT_ALLOWED_ORIGIN=
 
 ## SEO и скорость
 
-- Главная и страницы трёх проектов предварительно рендерятся на обоих языках.
+- Главная, опыт, проекты, контакты и страницы трёх проектов предварительно рендерятся на обоих языках.
 - Для каждой страницы заданы отдельные title, description, Open Graph и Twitter-метаданные.
 - Canonical, hreflang, абсолютные ссылки для предпросмотра и `/sitemap.xml` используют `NUXT_PUBLIC_SITE_URL`. Пока адрес не задан, фиктивные ссылки с localhost не генерируются, а sitemap возвращает 503 с указанием недостающей настройки.
-- `/robots.txt` разрешает обход страниц, исключает API и после настройки домена указывает sitemap. Карта содержит обе языковые версии главной и трёх проектов.
+- `/robots.txt` разрешает обход страниц, исключает API и после настройки домена указывает sitemap. Карта содержит 14 URL: семь страниц на двух языках.
 - На главной есть структурированные данные Person (JSON-LD).
 - Фото оптимизировано в WebP, имеет адаптивные размеры и высокий приоритет загрузки. У изображений указаны размеры; скриншоты ниже первого экрана загружаются лениво.
 - Шрифты хранятся локально, основной шрифт предзагружается. Для статических ресурсов заданы Cache-Control, production-файлы сжимаются Brotli/gzip.
@@ -95,11 +106,11 @@ app/
     layout/          # Header, Footer
     sections/        # Hero, Experience, Skills, Projects, Contact
     projects/        # Карточка проекта
-    ui/              # Иконки социальных сетей
+    ui/              # Общая Button и иконки социальных сетей
   composables/       # Форма и язык данных
   data/              # Профиль и опыт
   layouts/           # Оболочка страниц
-  pages/             # Главная и projects/[slug]
+  pages/             # Главная, experience, projects, contact и projects/[slug]
 shared/              # Общие данные проектов, типы и настройки SEO
 i18n/locales/        # Переводы en.json и ru.json
 modules/             # Совместимость i18n с Windows-путями со скобками
@@ -126,6 +137,7 @@ server/api/          # POST /api/contact
 - `main`: начальные README и `.gitignore`.
 - Первая версия сайта: `2026-11-09.initial-portfolio`.
 - Фото и улучшения SEO: `2026-11-09.profile-seo`.
+- Отдельные страницы, полный опыт, общие кнопки и конфиги: `2026-11-09.portfolio-pages`.
 - Следующие ветки: `YYYY-MM-DD.feature-name`.
 - Коммиты: `feat: add ...`, `fix: correct ...`, `docs: describe ...`, `chore: configure ...`.
 - Первая версия не сливается в `main`.

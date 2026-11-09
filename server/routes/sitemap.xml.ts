@@ -1,4 +1,5 @@
 import { projects } from '#shared/data/projects'
+import { publicPagePaths } from '#shared/data/routes'
 import { siteOrigin } from '#shared/utils/site-origin'
 
 const escapeXml = (value: string) =>
@@ -10,13 +11,14 @@ const escapeXml = (value: string) =>
 
 export default defineEventHandler((event) => {
   const origin = siteOrigin(useRuntimeConfig(event).public.siteUrl)
-  if (!origin)
+  if (!origin) {
     throw createError({
       statusCode: 503,
       statusMessage: 'Set NUXT_PUBLIC_SITE_URL before deploying',
     })
+  }
   setResponseHeader(event, 'Content-Type', 'application/xml; charset=utf-8')
-  const paths = ['', ...projects.map((project) => `/projects/${project.slug}`)]
+  const paths = [...publicPagePaths, ...projects.map((project) => `/projects/${project.slug}`)]
   const entries = paths
     .flatMap((path) =>
       ['en', 'ru'].map((locale) => {

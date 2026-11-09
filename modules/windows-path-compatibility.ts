@@ -8,13 +8,17 @@ import { defineNuxtModule } from '@nuxt/kit'
 export default defineNuxtModule({
   meta: { name: 'portfolio-windows-path-compatibility' },
   setup(_, nuxt) {
-    if (!/^[a-z]:/i.test(nuxt.options.rootDir) || !/[()[\]{}]/.test(nuxt.options.rootDir)) return
+    if (!/^[a-z]:/i.test(nuxt.options.rootDir) || !/[()[\]{}]/.test(nuxt.options.rootDir)) {
+      return
+    }
     nuxt.hook('nitro:config', (config) => {
       config.rollupConfig ||= {}
       const plugin = {
         name: 'portfolio:i18n-windows-paths',
         transform(code: string, id: string) {
-          if (!id.replaceAll('\\', '/').includes('/@nuxtjs/i18n/dist/runtime/shared/')) return
+          if (!id.replaceAll('\\', '/').includes('/@nuxtjs/i18n/dist/runtime/shared/')) {
+            return
+          }
           let output = code
             .replaceAll('#build/i18n-options.mjs', '#internal/i18n-options.mjs')
             .replaceAll('#build/i18n-route-resources.mjs', '#internal/i18n-route-resources.mjs')
@@ -23,8 +27,9 @@ export default defineNuxtModule({
               'const __nuxtMock = { runWithContext: async (fn) => await fn() };',
             )
             .replaceAll(/useNuxtApp\(\)/g, '__nuxtMock')
-          if (output.includes('useRuntimeConfig()'))
+          if (output.includes('useRuntimeConfig()')) {
             output = `import { useRuntimeConfig } from 'nitropack/runtime';\n${output}`
+          }
           return output === code ? null : { code: output, map: null }
         },
       }

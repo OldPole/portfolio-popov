@@ -32,9 +32,6 @@
     "location": "Минск, Беларусь",
     "focus": "Мой фокус",
     "focusValue": "React и TypeScript",
-    "approach": "Мой подход",
-    "approachValue": "Создавать. Улучшать. Выпускать.",
-    "scroll": "Чуть больше обо мне",
     "index": "Личное портфолио / 2026",
     "portrait": "Портрет Кирилла Попова"
   },
@@ -98,15 +95,15 @@
     "website": "Оставьте это поле пустым"
   },
   "footer": {
-    "description": "Фронтенд-разработчик. React и TypeScript.\nЖиву в Минске, создаю для веба.",
-    "copyright": "© {year} Кирилл Попов",
-    "built": "Создано на Nuxt и Tailwind CSS",
-    "motion": "Уменьшить анимацию",
-    "motionOn": "Включить анимацию"
+    "description": "Фронтенд-разработчик. React и TypeScript.\nЖиву в Минске, создаю для веба."
   },
   "seo": {
     "title": "Кирилл Попов — Frontend Developer",
-    "description": "Фронтенд-разработчик с фокусом на React и TypeScript. Опыт в Яндексе, Aligned Hearts и Innowise. Проекты, навыки и CV."
+    "description": "Фронтенд-разработчик с фокусом на React и TypeScript. Опыт в Яндексе, Aligned Hearts и Innowise. Проекты, навыки и CV.",
+    "name": "Кирилл Попов",
+    "experience": "Опыт фронтенд-разработки в Яндексе, Aligned Hearts и Innowise: задачи, технологии, навыки, образование и CV для скачивания.",
+    "projects": "Aligned Hearts, Next Ecommerce и SeriesPoisk: скриншоты, мой вклад во фронтенд, исходный код и доступные демо проектов.",
+    "contact": "Свяжитесь с Кириллом Поповым по поводу работы или проекта: почта, Telegram, LinkedIn и контактная форма."
   },
   "error": {
     "title": "Кажется, эта страница потерялась.",

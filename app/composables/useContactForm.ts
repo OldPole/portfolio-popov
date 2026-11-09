@@ -7,7 +7,9 @@ export function useContactForm() {
   const feedback = computed(() => (feedbackKey.value ? t(feedbackKey.value) : ''))
 
   async function submit() {
-    if (pending.value) return
+    if (pending.value) {
+      return
+    }
     status.value = 'idle'
     feedbackKey.value = ''
     pending.value = true

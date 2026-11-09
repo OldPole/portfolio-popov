@@ -16,27 +16,36 @@ export default defineEventHandler(async (event) => {
   setResponseHeader(event, 'Cache-Control', 'no-store')
   const config = useRuntimeConfig(event)
   const contentType = getHeader(event, 'content-type') || ''
-  if (!contentType.startsWith('application/json'))
+  if (!contentType.startsWith('application/json')) {
     throw createError({ statusCode: 415, statusMessage: 'JSON required' })
+  }
   const origin = getHeader(event, 'origin')
   const allowedOrigin = config.contactAllowedOrigin || getRequestURL(event).origin
-  if (origin && origin !== allowedOrigin)
+  if (origin && origin !== allowedOrigin) {
     throw createError({ statusCode: 403, statusMessage: 'Origin not allowed' })
-  if (Number(getHeader(event, 'content-length') || 0) > 20_000)
+  }
+  if (Number(getHeader(event, 'content-length') || 0) > 20_000) {
     throw createError({ statusCode: 413, statusMessage: 'Message too large' })
+  }
 
   const now = Date.now()
-  for (const [key, value] of attempts) if (value.expires < now) attempts.delete(key)
+  for (const [key, value] of attempts) {
+    if (value.expires < now) {
+      attempts.delete(key)
+    }
+  }
   const ip = getRequestIP(event) || 'unknown'
   const attempt = attempts.get(ip)
   if (attempt && attempt.count >= 5) {
     setResponseHeader(event, 'Retry-After', Math.ceil((attempt.expires - now) / 1000))
     throw createError({ statusCode: 429, statusMessage: 'Please try again later' })
   }
-  if (attempt) attempt.count++
-  else {
-    if (attempts.size >= 10_000)
+  if (attempt) {
+    attempt.count++
+  } else {
+    if (attempts.size >= 10_000) {
       throw createError({ statusCode: 429, statusMessage: 'Please try again later' })
+    }
     attempts.set(ip, { count: 1, expires: now + WINDOW })
   }
 
@@ -47,10 +56,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid message' })
   }
   const result = schema.safeParse(body)
-  if (!result.success) throw createError({ statusCode: 400, statusMessage: 'Invalid message' })
-  if (result.data.website) return { success: true }
-  if (!config.resendApiKey || !config.contactFrom)
+  if (!result.success) {
+    throw createError({ statusCode: 400, statusMessage: 'Invalid message' })
+  }
+  if (result.data.website) {
+    return { success: true }
+  }
+  if (!config.resendApiKey || !config.contactFrom) {
     throw createError({ statusCode: 503, statusMessage: 'Contact delivery unavailable' })
+  }
 
   const { name, email, message } = result.data
   try {

@@ -32,9 +32,6 @@
     "location": "Based in Minsk, Belarus",
     "focus": "My focus",
     "focusValue": "React & TypeScript",
-    "approach": "My approach",
-    "approachValue": "Build. Refine. Ship.",
-    "scroll": "A little more about me",
     "index": "Personal portfolio / 2026",
     "portrait": "Portrait of Kirill Popov"
   },
@@ -98,15 +95,15 @@
     "website": "Leave this field empty"
   },
   "footer": {
-    "description": "Frontend developer. React & TypeScript.\nBased in Minsk, building for the web.",
-    "copyright": "© {year} Kirill Popov",
-    "built": "Built with Nuxt & Tailwind CSS",
-    "motion": "Reduce motion",
-    "motionOn": "Enable animations"
+    "description": "Frontend developer. React & TypeScript.\nBased in Minsk, building for the web."
   },
   "seo": {
     "title": "Kirill Popov — Frontend Developer",
-    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV."
+    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV.",
+    "name": "Kirill Popov",
+    "experience": "Frontend experience at Yandex, Aligned Hearts and Innowise: responsibilities, technologies, skills, education and a downloadable CV.",
+    "projects": "Explore Aligned Hearts, Next Ecommerce and SeriesPoisk: screenshots, frontend contributions, source code and available live demos.",
+    "contact": "Contact Kirill Popov about frontend roles or projects by email, Telegram, LinkedIn or the contact form."
   },
   "error": {
     "title": "This page took a wrong turn.",

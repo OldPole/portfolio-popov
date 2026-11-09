@@ -1,5 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import windowsPathCompatibility from './modules/windows-path-compatibility'
+import { publicPagePaths } from './shared/data/routes'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-09',
@@ -41,8 +42,11 @@ export default defineNuxtConfig({
       headers: { 'cache-control': 'public, max-age=604800, stale-while-revalidate=86400' },
     },
     '/': { redirect: '/en' },
-    '/en': { prerender: true },
-    '/ru': { prerender: true },
+    ...Object.fromEntries(
+      ['en', 'ru'].flatMap((locale) =>
+        publicPagePaths.map((path) => [`/${locale}${path}`, { prerender: true }]),
+      ),
+    ),
     '/en/projects/**': { prerender: true },
     '/ru/projects/**': { prerender: true },
   },
