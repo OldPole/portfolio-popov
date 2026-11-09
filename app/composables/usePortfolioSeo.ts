@@ -1,23 +1,26 @@
-import { profile } from '~/data/profile'
-import { siteOrigin } from '#shared/utils/site-origin'
+import { profile } from '~/data/profile';
+import { siteOrigin } from '#shared/utils/site-origin';
 
 export function usePortfolioSeo(options: {
-  title: () => string
-  description: () => string
-  image?: () => string
-  imageWidth?: () => number
-  imageHeight?: () => number
+  title: () => string;
+  description: () => string;
+  image?: () => string;
+  imageWidth?: () => number;
+  imageHeight?: () => number;
 }) {
-  const { locale } = useI18n()
-  const route = useRoute()
-  const config = useRuntimeConfig()
-  const origin = computed(() => siteOrigin(config.public.siteUrl))
-  const canonical = computed(() => (origin.value ? `${origin.value}${route.path}` : undefined))
+  const { locale } = useI18n();
+  const route = useRoute();
+  const config = useRuntimeConfig();
+
+  const origin = computed(() => siteOrigin(config.public.siteUrl));
+  const canonical = computed(() =>
+    origin.value ? `${origin.value}${route.path}` : undefined,
+  );
   const image = computed(() =>
     origin.value
       ? `${origin.value}${options.image?.() || '/images/portfolio-social.jpg'}`
       : undefined,
-  )
+  );
 
   useSeoMeta({
     title: options.title,
@@ -37,13 +40,15 @@ export function usePortfolioSeo(options: {
     twitterDescription: options.description,
     twitterImage: () => image.value,
     twitterImageAlt: options.title,
-  })
+  });
 
   useHead(() => {
     if (!origin.value) {
-      return {}
+      return {};
     }
-    const pagePath = route.path.replace(/^\/(en|ru)(?=\/|$)/, '')
+
+    const pagePath = route.path.replace(/^\/(en|ru)(?=\/|$)/, '');
+
     return {
       link: [
         { key: 'canonical', rel: 'canonical', href: canonical.value! },
@@ -66,6 +71,6 @@ export function usePortfolioSeo(options: {
           href: `${origin.value}/en${pagePath}`,
         },
       ],
-    }
-  })
+    };
+  });
 }

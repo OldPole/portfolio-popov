@@ -1,21 +1,28 @@
 <script setup lang="ts">
-import { Expand } from '@lucide/vue'
-import type { ProjectImage } from '#shared/types/portfolio'
-import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
+import { Expand } from '@lucide/vue';
 
-withDefaults(defineProps<{ image: ProjectImage; accent?: string; priority?: boolean }>(), {
-  accent: undefined,
-  priority: false,
-})
+import type { ProjectImage } from '#shared/types/portfolio';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
-const { t } = useI18n()
-const lang = usePortfolioLocale()
+withDefaults(
+  defineProps<{ image: ProjectImage; accent?: string; priority?: boolean }>(),
+  {
+    accent: undefined,
+    priority: false,
+  },
+);
+
+const { t } = useI18n();
+const lang = usePortfolioLocale();
 </script>
 
 <template>
   <figure
     class="project-screenshot"
-    :style="{ '--screenshot-width': `${image.width}px`, '--screenshot-accent': accent }"
+    :style="{
+      '--screenshot-width': `${image.width}px`,
+      '--screenshot-accent': accent,
+    }"
   >
     <a
       :href="image.src"
@@ -48,10 +55,7 @@ const lang = usePortfolioLocale()
         size="small"
       >
         {{ t('projects.openOriginal') }}
-        <Expand
-          :size="14"
-          aria-hidden="true"
-        />
+        <Expand :size="14" aria-hidden="true" />
       </UiButton>
     </figcaption>
   </figure>

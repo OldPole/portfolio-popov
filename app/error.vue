@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
-defineProps<{ error: NuxtError }>()
-const isRussian = computed(() => useRequestURL().pathname.startsWith('/ru'))
+import type { NuxtError } from '#app';
+
+defineProps<{ error: NuxtError }>();
+
+const isRussian = computed(() => useRequestURL().pathname.startsWith('/ru'));
 </script>
 
 <template>
   <div class="error-page">
     <p class="eyebrow">{{ error.statusCode }}</p>
-    <h1>{{ isRussian ? 'Эта страница потерялась.' : 'This page took a wrong turn.' }}</h1>
+    <h1>
+      {{
+        isRussian ? 'Эта страница потерялась.' : 'This page took a wrong turn.'
+      }}
+    </h1>
     <p>
       {{
         isRussian

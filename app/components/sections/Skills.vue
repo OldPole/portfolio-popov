@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { GraduationCap, Languages } from '@lucide/vue'
-import { skills } from '~/data/profile'
-withDefaults(defineProps<{ numbered?: boolean }>(), { numbered: true })
-const { t } = useI18n()
+import { GraduationCap, Languages } from '@lucide/vue';
+
+import { skills } from '~/data/profile';
+
+withDefaults(defineProps<{ numbered?: boolean }>(), { numbered: true });
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -20,15 +23,13 @@ const { t } = useI18n()
           </p>
           <h2 id="skills-title">{{ t('skills.title') }}</h2>
         </div>
+
         <p class="section-intro">{{ t('skills.intro') }}</p>
       </div>
+
       <div class="skills-grid">
         <div class="skill-groups">
-          <div
-            v-for="group in skills"
-            :key="group.key"
-            class="skill-group"
-          >
+          <div v-for="group in skills" :key="group.key" class="skill-group">
             <h3>{{ t(`skills.${group.key}`) }}</h3>
             <div class="tag-list">
               <span
@@ -45,13 +46,11 @@ const { t } = useI18n()
             </div>
           </div>
         </div>
+
         <aside class="background-panel">
           <div class="education-block">
             <p class="small-label">
-              <GraduationCap
-                :size="16"
-                aria-hidden="true"
-              />
+              <GraduationCap :size="16" aria-hidden="true" />
               {{ t('skills.education') }}
             </p>
             <h3>{{ t('skills.university') }}</h3>
@@ -61,18 +60,17 @@ const { t } = useI18n()
               <span>{{ t('skills.grade') }}</span>
             </div>
           </div>
+
           <div class="languages-block">
             <p class="small-label">
-              <Languages
-                :size="16"
-                aria-hidden="true"
-              />
+              <Languages :size="16" aria-hidden="true" />
               {{ t('skills.languages') }}
             </p>
             <div>
               <span>{{ t('skills.english') }}</span>
               <span class="muted">{{ t('skills.englishLevel') }}</span>
             </div>
+
             <div>
               <span>{{ t('skills.russian') }}</span>
               <span class="muted">{{ t('skills.russianLevel') }}</span>

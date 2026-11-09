@@ -1,1 +1,6 @@
-export const publicPagePaths = ['', '/experience', '/projects', '/contact'] as const
+export const publicPagePaths = [
+  '',
+  '/experience',
+  '/projects',
+  '/contact',
+] as const;

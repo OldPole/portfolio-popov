@@ -1,42 +1,44 @@
 <script setup lang="ts">
-import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from '@lucide/vue'
-import { projects } from '#shared/data/projects'
-import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
-import { usePortfolioSeo } from '~/composables/usePortfolioSeo'
-const route = useRoute()
-const { t } = useI18n()
-const lang = usePortfolioLocale()
-const localePath = useLocalePath()
-const project = computed(() => projects.find((item) => item.slug === route.params.slug))
+import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
+
+import { projects } from '#shared/data/projects';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+import { usePortfolioSeo } from '~/composables/usePortfolioSeo';
+
+const route = useRoute();
+const { t } = useI18n();
+const lang = usePortfolioLocale();
+const localePath = useLocalePath();
+
+const project = computed(() =>
+  projects.find(item => item.slug === route.params.slug),
+);
+
 if (!project.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Project not found' })
+  throw createError({ statusCode: 404, statusMessage: 'Project not found' });
 }
+
 usePortfolioSeo({
   title: () => `${project.value?.name} — Kirill Popov`,
   description: () => project.value?.description[lang.value] || '',
   image: () => project.value?.image || '/images/portfolio-social.jpg',
   imageWidth: () => project.value?.imageWidth || 1200,
   imageHeight: () => project.value?.imageHeight || 630,
-})
+});
 </script>
 
 <template>
-  <div
-    v-if="project"
-    class="project-page container"
-  >
+  <div v-if="project" class="project-page container">
     <UiButton
       :to="localePath('/projects')"
       variant="text"
       size="small"
       class="project-back"
     >
-      <ArrowLeft
-        :size="16"
-        aria-hidden="true"
-      />
+      <ArrowLeft :size="16" aria-hidden="true" />
       {{ t('common.back') }}
     </UiButton>
+
     <div class="project-page-heading">
       <p class="eyebrow">
         {{ project.category[lang] }}
@@ -54,17 +56,11 @@ usePortfolioSeo({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <UiSocialIcon
-            name="github"
-            :size="16"
-            aria-hidden="true"
-          />
+          <UiSocialIcon name="github" :size="16" aria-hidden="true" />
           {{ t('common.viewCode') }}
-          <ArrowUpRight
-            :size="15"
-            aria-hidden="true"
-          />
+          <ArrowUpRight :size="15" aria-hidden="true" />
         </UiButton>
+
         <UiButton
           v-if="project.demo"
           :href="project.demo"
@@ -72,13 +68,11 @@ usePortfolioSeo({
           rel="noopener noreferrer"
         >
           {{ t('common.liveDemo') }}
-          <ExternalLink
-            :size="16"
-            aria-hidden="true"
-          />
+          <ExternalLink :size="16" aria-hidden="true" />
         </UiButton>
       </div>
     </div>
+
     <ProjectsScreenshot
       :image="{
         src: project.image,
@@ -93,42 +87,32 @@ usePortfolioSeo({
       <div>
         <div class="project-overview">
           <h2>{{ t('projects.overview') }}</h2>
-          <p
-            v-for="paragraph in project.overview[lang]"
-            :key="paragraph"
-          >
+          <p v-for="paragraph in project.overview[lang]" :key="paragraph">
             {{ paragraph }}
           </p>
         </div>
+
         <h2>{{ t('projects.contribution') }}</h2>
         <p>{{ project.contribution[lang] }}</p>
         <h3>{{ t('projects.highlights') }}</h3>
         <ul class="project-highlights">
-          <li
-            v-for="item in project.highlights[lang]"
-            :key="item"
-          >
-            <Check
-              :size="17"
-              aria-hidden="true"
-            />
+          <li v-for="item in project.highlights[lang]" :key="item">
+            <Check :size="17" aria-hidden="true" />
             {{ item }}
           </li>
         </ul>
       </div>
+
       <aside v-if="project.stack.length">
         <p class="eyebrow">{{ t('projects.stack') }}</p>
         <div class="tag-list">
-          <span
-            v-for="item in project.stack"
-            :key="item"
-            class="tag skill-tag"
-          >
+          <span v-for="item in project.stack" :key="item" class="tag skill-tag">
             {{ item }}
           </span>
         </div>
       </aside>
     </div>
+
     <section
       class="project-implementation"
       aria-labelledby="implementation-title"
@@ -143,6 +127,7 @@ usePortfolioSeo({
           <p>{{ detail.body }}</p>
         </article>
       </div>
+
       <UiButton
         :href="`${project.repository}#readme`"
         target="_blank"
@@ -152,16 +137,11 @@ usePortfolioSeo({
         class="project-readme"
       >
         {{ t('projects.readme') }}
-        <ArrowUpRight
-          :size="14"
-          aria-hidden="true"
-        />
+        <ArrowUpRight :size="14" aria-hidden="true" />
       </UiButton>
     </section>
-    <section
-      class="project-gallery"
-      aria-labelledby="gallery-title"
-    >
+
+    <section class="project-gallery" aria-labelledby="gallery-title">
       <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
       <p class="project-gallery-intro">{{ t('projects.galleryIntro') }}</p>
       <div class="project-gallery-grid">

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<{
-    to?: string
-    href?: string
-    variant?: 'primary' | 'outline' | 'ghost' | 'text'
-    size?: 'default' | 'small' | 'icon'
-    type?: 'button' | 'submit' | 'reset'
-    disabled?: boolean
+    to?: string;
+    href?: string;
+    variant?: 'primary' | 'outline' | 'ghost' | 'text';
+    size?: 'default' | 'small' | 'icon';
+    type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
   }>(),
   {
     to: undefined,
@@ -18,26 +18,20 @@ const props = withDefaults(
     type: 'button',
     disabled: false,
   },
-)
+);
 
-const classes = computed(() => ['button', `button-${props.variant}`, `button-${props.size}`])
+const classes = computed(() => [
+  'button',
+  `button-${props.variant}`,
+  `button-${props.size}`,
+]);
 </script>
 
 <template>
-  <NuxtLink
-    v-if="to"
-    :to="to"
-    :class="classes"
-    v-bind="$attrs"
-  >
+  <NuxtLink v-if="to" :to="to" :class="classes" v-bind="$attrs">
     <slot />
   </NuxtLink>
-  <a
-    v-else-if="href"
-    :href="href"
-    :class="classes"
-    v-bind="$attrs"
-  >
+  <a v-else-if="href" :href="href" :class="classes" v-bind="$attrs">
     <slot />
   </a>
   <button

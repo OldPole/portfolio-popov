@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ name: 'github' | 'linkedin'; size?: number }>()
+defineProps<{ name: 'github' | 'linkedin'; size?: number }>();
 </script>
 
 <template>

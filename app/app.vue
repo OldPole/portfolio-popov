@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-useHead(() => ({ htmlAttrs: { lang: locale.value, dir: 'ltr' } }))
+const { locale } = useI18n();
+
+useHead(() => ({ htmlAttrs: { lang: locale.value, dir: 'ltr' } }));
 </script>
 
 <template>

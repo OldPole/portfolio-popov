@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ArrowUpRight } from '@lucide/vue'
-import { projects } from '#shared/data/projects'
-import { profile } from '~/data/profile'
+import { ArrowUpRight } from '@lucide/vue';
+
+import { projects } from '#shared/data/projects';
+import { profile } from '~/data/profile';
+
 withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
   headingTag: 'h2',
   numbered: true,
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>
@@ -22,15 +24,14 @@ const { t } = useI18n()
           <span v-if="numbered">03 /</span>
           {{ t('projects.eyebrow') }}
         </p>
-        <component
-          :is="headingTag"
-          id="projects-title"
-        >
+        <component :is="headingTag" id="projects-title">
           {{ t('projects.title') }}
         </component>
       </div>
+
       <p class="section-intro">{{ t('projects.intro') }}</p>
     </div>
+
     <div class="projects-grid">
       <ProjectsProjectCard
         v-for="(project, index) in projects"
@@ -40,6 +41,7 @@ const { t } = useI18n()
         :heading-tag="headingTag === 'h1' ? 'h2' : 'h3'"
       />
     </div>
+
     <UiButton
       :href="profile.github"
       target="_blank"
@@ -48,10 +50,7 @@ const { t } = useI18n()
       class="github-more"
     >
       {{ t('projects.all') }}
-      <ArrowUpRight
-        :size="16"
-        aria-hidden="true"
-      />
+      <ArrowUpRight :size="16" aria-hidden="true" />
     </UiButton>
   </section>
 </template>
