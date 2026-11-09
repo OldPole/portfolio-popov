@@ -1,5 +1,147 @@
 # Kirill Popov — Portfolio
 
-Personal bilingual portfolio built with Nuxt, Vue, TypeScript and Tailwind CSS.
+Личное портфолио frontend-разработчика: опыт, навыки, образование, проекты, скачивание CV и контактная форма. Дизайн вдохновлён [benoldham.dev](https://www.benoldham.dev/), реализация написана на Nuxt.
 
-The first implementation is developed on a feature branch. The main branch contains only repository initialization.
+## Стек
+
+Nuxt 4, Vue 3, TypeScript, Tailwind CSS 4, Nuxt I18n, Color Mode, Nuxt Image, Zod и Resend. Локальный шрифт Manrope с латиницей и кириллицей (SIL OFL).
+
+## Запуск
+
+Рекомендуется **Node.js 24.22.2 LTS**, версия также указана в `.nvmrc`. Поддерживаемые версии: `^22.22.3 || ^24.15.0 || >=26.0.0`.
+
+В новом окне терминала проверьте окружение:
+
+```powershell
+node --version
+npm --version
+```
+
+```powershell
+Set-Location -LiteralPath 'D:\Works\Vue (Nuxt)\Portfolio-Popov'
+npm install
+npm start
+```
+
+Откройте **http://localhost:3000**. Английский язык и тёмная тема включены по умолчанию. `npm run dev` — аналог `npm start`. Остановить сервер: `Ctrl+C`.
+
+Если PowerShell запрещает запуск `npm.ps1`, используйте `npm.cmd install` и `npm.cmd start`; менять политику выполнения не требуется. Для чистой установки после клонирования используйте `npm ci`.
+
+## Проверка в консоли
+
+```powershell
+npm run typecheck
+npm run lint
+npm run format:check
+npm run build
+npm run preview
+```
+
+`typecheck` проверяет TypeScript. `build` создаёт production-сборку с предварительным рендерингом языковых страниц. `preview` запускает её локально; адрес указан в консоли. Сначала остановите `npm start`, если он занимает тот же порт.
+
+Для production-запуска собранного сервера: `node .output/server/index.mjs`.
+
+| Команда                     | Назначение                              |
+| --------------------------- | --------------------------------------- |
+| `npm start` / `npm run dev` | Разработка с обновлением при изменениях |
+| `npm run build`             | Production-сборка                       |
+| `npm run preview`           | Просмотр production-сборки              |
+| `npm run typecheck`         | Проверка типов                          |
+| `npm run lint`              | Проверка ESLint                         |
+| `npm run lint:fix`          | Исправление ошибок ESLint               |
+| `npm run format`            | Форматирование                          |
+| `npm run format:check`      | Проверка форматирования                 |
+
+Автотесты по текущим требованиям не добавлены. GitHub Actions проверяет ESLint, форматирование, типы и сборку, без деплоя.
+
+Prettier отвечает за форматирование: отступы в два пробела, точки с запятой, строки до 80 символов, компактные Vue-атрибуты, LF и читаемые HTML-теги без переноса закрывающей скобки в соседний элемент. ESLint проверяет ошибки JavaScript, TypeScript и Vue; `eslint-config-prettier` отключает конфликтующие правила оформления. `.editorconfig` задаёт общие настройки редактора. Для исправления кода запускайте `npm run lint:fix`, затем `npm run format`.
+
+## Страницы и компоненты
+
+Навигация открывает отдельные страницы `/en/experience`, `/en/projects`, `/en/contact` и их русские версии `/ru/...`. На каждой есть общие Header и Footer; страница опыта включает навыки и образование. Главная сохраняет порядок Hero → Experience → Skills → Projects → Contact.
+
+`components/ui/Button.vue` используется для действий, ссылок-кнопок и иконок. Варианты: `primary`, `outline`, `ghost`, `text`; размеры: `default`, `small`, `icon`. Компонент выводит `NuxtLink` для `to`, обычную ссылку для `href` и нативную кнопку для действий. Hover, клавиатурный фокус и курсор заданы общими стилями.
+
+## Контактная форма
+
+Форма принимает имя, email и сообщение. Получатель — `ipetr6828@gmail.com`. Для доставки нужны аккаунт [Resend](https://resend.com/docs/send-with-nodejs) и адрес отправителя на подтверждённом домене.
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Заполните локальный `.env`:
+
+```dotenv
+NUXT_RESEND_API_KEY=your_resend_api_key
+NUXT_CONTACT_FROM=Kirill Popov <portfolio@your-verified-domain.example>
+NUXT_CONTACT_TO=ipetr6828@gmail.com
+NUXT_CONTACT_ALLOWED_ORIGIN=
+```
+
+Для локальной разработки Origin можно оставить пустым. После изменения переменных перезапустите сервер. Production-сервер получает настройки через окружение хостинга.
+
+Без почтовых настроек форма сообщает о недоступности доставки и предлагает прямую почту. Email, Telegram, GitHub и LinkedIn доступны всегда. Сообщения не сохраняются в базе или логах. Есть серверная валидация, honeypot, проверка Origin и ограничение частоты отправки. Лимит хранится в памяти процесса; при масштабировании его следует вынести в общее хранилище или на уровень хостинга.
+
+Перед будущим деплоем задайте `NUXT_PUBLIC_SITE_URL` (публичный адрес сайта без пути) и `NUXT_CONTACT_ALLOWED_ORIGIN`, затем выполните `npm run build`. Сейчас сайт не опубликован.
+
+## SEO и скорость
+
+- Главная, опыт, проекты, контакты и страницы трёх проектов предварительно рендерятся на обоих языках.
+- Для каждой страницы заданы отдельные title, description, Open Graph и Twitter-метаданные.
+- Canonical, hreflang, абсолютные ссылки для предпросмотра и `/sitemap.xml` используют `NUXT_PUBLIC_SITE_URL`. Пока адрес не задан, фиктивные ссылки с localhost не генерируются, а sitemap возвращает 503 с указанием недостающей настройки.
+- `/robots.txt` разрешает обход страниц, исключает API и после настройки домена указывает sitemap. Карта содержит 14 URL: семь страниц на двух языках.
+- На главной есть структурированные данные Person (JSON-LD).
+- Фото оптимизировано в WebP, имеет адаптивные размеры и высокий приоритет загрузки. У изображений указаны размеры; скриншоты ниже первого экрана загружаются лениво.
+- Шрифты хранятся локально, основной шрифт предзагружается. Для статических ресурсов заданы Cache-Control, production-файлы сжимаются Brotli/gzip.
+
+Локальный аудит выполняется по production-сборке, а не по `npm start`. Он не заменяет замеры после публикации: итоговая скорость зависит от хостинга, CDN, сети и устройства. Реальные Core Web Vitals и индексацию можно оценить после деплоя.
+
+## Структура
+
+```text
+app/
+  assets/css/        # Tailwind, переменные тем, стили
+  components/
+    layout/          # Header, Footer
+    sections/        # Hero, Experience, Skills, Projects, Contact
+    projects/        # Карточка проекта
+    ui/              # Общая Button и иконки социальных сетей
+  composables/       # Форма и язык данных
+  data/              # Профиль и опыт
+  layouts/           # Оболочка страниц
+  pages/             # Главная, experience, projects, contact и projects/[slug]
+shared/              # Общие данные проектов, типы и настройки SEO
+i18n/locales/        # Переводы en.json и ru.json
+modules/             # Совместимость i18n с Windows-путями со скобками
+public/
+  cv/                # PDF резюме
+  fonts/             # Шрифты и лицензия
+  images/projects/   # Скриншоты
+server/api/          # POST /api/contact
+.github/workflows/   # Проверка типов и сборки
+```
+
+В текущем пути есть скобки (`Vue (Nuxt)`). `windows-path-compatibility.ts` исправляет сопоставление путей в серверном преобразовании Nuxt I18n 10.6 на Windows. Он включается только для соответствующих путей и не изменяет зависимости.
+
+## Контент и изображения
+
+- Опыт, образование и навыки основаны на предоставленном CV.
+- Описания проектов основаны на README и подтверждённом личном вкладе.
+- Скриншоты Next Ecommerce и SeriesPoisk сняты с публичных демо.
+- Скриншоты Aligned Hearts взяты из README; исходный проект опубликован под GPL-3.0. Авторство команды сохранено ссылкой на репозиторий.
+- Галереи содержат 14 экранов: 6 у Aligned Hearts, по 4 у Next Ecommerce и SeriesPoisk. PNG-оригиналы Aligned Hearts сохранены без пересжатия, новые снимки демо сохранены в исходном JPEG-формате браузера с большей шириной вместо старых 1265 px. Для отображения используются WebP с качеством 95 и адаптивными вариантами 1x/2x; каждый экран можно открыть в исходном разрешении.
+- На страницах проектов есть обзор, личный вклад, реализованные возможности, технические решения, полный стек и ссылка на README. На страницах проектов удалена только нижняя кнопка Get in touch; кнопка в шапке доступна во всех разделах.
+- Номера секций выводятся только на главной. В шапке CV расположен рядом с языком и темой; соцссылки в hero выстроены в колонку, включая мобильную версию.
+- Фото владельца размещено в Hero на компьютере и телефоне; WebP-версия хранится в `public/images/kirill-popov.webp`.
+
+## Git workflow
+
+- `main` содержит актуальную завершённую версию портфолио.
+- Для задачи создаётся одна feature-ветка от актуального `main`: `YYYY-MM-DD.feature-name`.
+- Все изменения одной задачи сохраняются в этой ветке.
+- Готовая feature-ветка вливается в `main` через `git merge --no-ff` с отдельным коммитом слияния.
+- После успешного push в `main` завершённая feature-ветка удаляется локально и на GitHub.
+- Коммиты: `feat: add ...`, `fix: correct ...`, `docs: describe ...`, `chore: configure ...`.
+
+`.env`, зависимости, кэши и сборки исключены из Git. `.env.example` и `package-lock.json` сохраняются в репозитории.

@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "home": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Get in touch",
+    "menu": "Toggle navigation",
+    "skip": "Skip to content"
+  },
+  "common": {
+    "download": "Download CV",
+    "viewCode": "Source code",
+    "liveDemo": "Live demo",
+    "details": "Explore project",
+    "back": "All projects",
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme",
+    "language": "Switch to Russian",
+    "screenshot": "Screenshot of {name}",
+    "navigation": "Navigation",
+    "socials": "Find me elsewhere",
+    "close": "Close",
+    "top": "Back to top"
+  },
+  "hero": {
+    "eyebrow": "Hi, I'm Kirill",
+    "title": "Frontend Developer",
+    "subtitle": "Thoughtful interfaces.\nSolid engineering.",
+    "description": "I build web applications with React and TypeScript — from the first component to production. My experience spans startup products and frontend work at Yandex.",
+    "description2": "I enjoy turning complex product requirements into clear, maintainable interfaces, connecting APIs and making real-time interactions feel natural.",
+    "work": "Explore my work",
+    "location": "Based in Minsk, Belarus",
+    "focus": "My focus",
+    "focusValue": "React & TypeScript",
+    "index": "Personal portfolio / 2026",
+    "portrait": "Portrait of Kirill Popov"
+  },
+  "experience": {
+    "eyebrow": "My journey",
+    "title": "Experience",
+    "intro": "Product work, real teams, and lessons from shipping.",
+    "cv": "The full story is in my CV"
+  },
+  "skills": {
+    "eyebrow": "My toolkit",
+    "title": "Skills & background",
+    "intro": "The technologies I work with, and the foundations behind them.",
+    "core": "Languages & frameworks",
+    "state": "State & data",
+    "ui": "Interface & design systems",
+    "routing": "Routing & integration",
+    "quality": "Testing & workflow",
+    "education": "Education",
+    "university": "Belarusian State University of Informatics and Radioelectronics",
+    "degree": "Bachelor's degree · Game Design",
+    "period": "2024 — 2028",
+    "grade": "Average grade: 8.33",
+    "languages": "Languages",
+    "english": "English",
+    "englishLevel": "B1+",
+    "russian": "Russian",
+    "russianLevel": "Native"
+  },
+  "projects": {
+    "eyebrow": "Selected work",
+    "title": "Projects",
+    "intro": "A selection of products I've helped build and ideas I've brought to life.",
+    "all": "More on GitHub",
+    "contribution": "My contribution",
+    "highlights": "What it includes",
+    "stack": "Built with",
+    "next": "Next project",
+    "overview": "About the project",
+    "implementation": "How I built it",
+    "gallery": "A closer look",
+    "galleryIntro": "Explore the screens and open any screenshot at its original resolution.",
+    "openOriginal": "Open original",
+    "readme": "Read the project README"
+  },
+  "contact": {
+    "eyebrow": "Let's talk",
+    "title": "Have something\nin mind?",
+    "intro": "A product idea, a frontend role, or a project worth building together — I'd like to hear about it.",
+    "emailLabel": "Drop me a line",
+    "formTitle": "Send me a message",
+    "name": "Your name",
+    "email": "Email address",
+    "message": "Your message",
+    "namePlaceholder": "How should I call you?",
+    "emailPlaceholder": "you{'@'}example.com",
+    "messagePlaceholder": "Tell me a little about your project or opportunity…",
+    "send": "Send message",
+    "sending": "Sending…",
+    "success": "Thanks for your message! I'll get back to you by email.",
+    "error": "Your message couldn't be sent. Please try again or contact me by email or Telegram.",
+    "unavailable": "Message delivery is currently unavailable. Please email me or send a message on Telegram.",
+    "invalid": "Please check your name, email and message.",
+    "rateLimit": "Too many attempts. Please wait a few minutes or contact me directly.",
+    "alternative": "Prefer a chat? Find me on Telegram",
+    "privacy": "Your name, email and message are used only to reply to your enquiry.",
+    "website": "Leave this field empty"
+  },
+  "footer": {
+    "description": "Frontend developer. React & TypeScript.\nBased in Minsk, building for the web."
+  },
+  "seo": {
+    "title": "Kirill Popov — Frontend Developer",
+    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV.",
+    "name": "Kirill Popov",
+    "experience": "Frontend experience at Yandex, Aligned Hearts and Innowise: responsibilities, technologies, skills, education and a downloadable CV.",
+    "projects": "Explore Aligned Hearts, Next Ecommerce and SeriesPoisk: screenshots, frontend contributions, source code and available live demos.",
+    "contact": "Contact Kirill Popov about frontend roles or projects by email, Telegram, LinkedIn or the contact form."
+  },
+  "error": {
+    "title": "This page took a wrong turn.",
+    "description": "The page you're looking for may have moved or doesn't exist.",
+    "home": "Back to home"
+  }
+}

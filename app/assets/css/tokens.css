@@ -1,0 +1,29 @@
+:root {
+  color-scheme: dark;
+  --bg: #111113;
+  --surface: #1b1b1e;
+  --surface-raised: #232326;
+  --text: #eeeae3;
+  --muted: #aaa8a4;
+  --subtle: #858581;
+  --line: #353538;
+  --accent: #c5ef86;
+  --accent-ink: #18230d;
+  --header: rgb(17 17 19 / 93%);
+  --font-sans: 'Portfolio Sans', 'Segoe UI', sans-serif;
+  --font-display: 'Portfolio Sans', 'Segoe UI', sans-serif;
+}
+
+:root.light {
+  color-scheme: light;
+  --bg: #f8f7f3;
+  --surface: #eeede7;
+  --surface-raised: #e4e3dd;
+  --text: #20221e;
+  --muted: #5c6057;
+  --subtle: #6c7067;
+  --line: #d4d5cc;
+  --accent: #35550d;
+  --accent-ink: #f3f9e9;
+  --header: rgb(248 247 243 / 94%);
+}
