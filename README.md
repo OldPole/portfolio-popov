@@ -137,13 +137,11 @@ server/api/          # POST /api/contact
 
 ## Git workflow
 
-- `main`: начальные README и `.gitignore`.
-- Первая версия сайта: `2026-11-09.initial-portfolio`.
-- Фото и улучшения SEO: `2026-11-09.profile-seo`.
-- Отдельные страницы, полный опыт, общие кнопки и конфиги: `2026-11-09.portfolio-pages`.
-- Подробные проекты, галереи и адаптивность: `2026-11-09.project-details`.
-- Следующие ветки: `YYYY-MM-DD.feature-name`.
+- `main` содержит актуальную завершённую версию портфолио.
+- Для задачи создаётся одна feature-ветка от актуального `main`: `YYYY-MM-DD.feature-name`.
+- Все изменения одной задачи сохраняются в этой ветке.
+- Готовая feature-ветка вливается в `main` через `git merge --no-ff` с отдельным коммитом слияния.
+- После успешного push в `main` завершённая feature-ветка удаляется локально и на GitHub.
 - Коммиты: `feat: add ...`, `fix: correct ...`, `docs: describe ...`, `chore: configure ...`.
-- Первая версия не сливается в `main`.
 
 `.env`, зависимости, кэши и сборки исключены из Git. `.env.example` и `package-lock.json` сохраняются в репозитории.
