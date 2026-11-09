@@ -79,23 +79,27 @@ usePortfolioSeo({
         </UiButton>
       </div>
     </div>
-    <div
-      class="project-detail-image"
-      :style="{ background: project.accent }"
-    >
-      <NuxtImg
-        :src="project.image"
-        :alt="t('common.screenshot', { name: project.name })"
-        :width="project.imageWidth"
-        :height="project.imageHeight"
-        sizes="sm:100vw lg:1200px"
-        format="webp"
-        preload
-      />
-    </div>
+    <ProjectsScreenshot
+      :image="{
+        src: project.image,
+        width: project.imageWidth,
+        height: project.imageHeight,
+        caption: project.imageCaption,
+      }"
+      :accent="project.accent"
+      priority
+    />
     <div class="project-body">
       <div>
-        <p class="eyebrow">{{ t('projects.contribution') }}</p>
+        <div class="project-overview">
+          <h2>{{ t('projects.overview') }}</h2>
+          <p
+            v-for="paragraph in project.overview[lang]"
+            :key="paragraph"
+          >
+            {{ paragraph }}
+          </p>
+        </div>
         <h2>{{ t('projects.contribution') }}</h2>
         <p>{{ project.contribution[lang] }}</p>
         <h3>{{ t('projects.highlights') }}</h3>
@@ -125,30 +129,48 @@ usePortfolioSeo({
         </div>
       </aside>
     </div>
-    <div
-      v-for="image in project.gallery"
-      :key="image.src"
-      class="project-gallery-image"
+    <section
+      class="project-implementation"
+      aria-labelledby="implementation-title"
     >
-      <NuxtImg
-        :src="image.src"
-        :alt="t('common.screenshot', { name: project.name })"
-        :width="image.width"
-        :height="image.height"
-        sizes="sm:100vw lg:1200px"
-        format="webp"
-        loading="lazy"
-      />
-    </div>
-    <NuxtLink
-      :to="localePath('/contact')"
-      class="project-contact-link"
+      <h2 id="implementation-title">{{ t('projects.implementation') }}</h2>
+      <div class="implementation-grid">
+        <article
+          v-for="detail in project.implementation[lang]"
+          :key="detail.title"
+        >
+          <h3>{{ detail.title }}</h3>
+          <p>{{ detail.body }}</p>
+        </article>
+      </div>
+      <UiButton
+        :href="`${project.repository}#readme`"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="text"
+        size="small"
+        class="project-readme"
+      >
+        {{ t('projects.readme') }}
+        <ArrowUpRight
+          :size="14"
+          aria-hidden="true"
+        />
+      </UiButton>
+    </section>
+    <section
+      class="project-gallery"
+      aria-labelledby="gallery-title"
     >
-      {{ t('nav.contact') }}
-      <ArrowUpRight
-        :size="24"
-        aria-hidden="true"
-      />
-    </NuxtLink>
+      <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
+      <p class="project-gallery-intro">{{ t('projects.galleryIntro') }}</p>
+      <div class="project-gallery-grid">
+        <ProjectsScreenshot
+          v-for="image in project.gallery"
+          :key="image.src"
+          :image="image"
+        />
+      </div>
+    </section>
   </div>
 </template>

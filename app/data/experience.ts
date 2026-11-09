@@ -100,6 +100,16 @@ export const experience = [
         'Участвовал в код-ревью и работал в команде с применением Agile-методологий.',
       ],
     },
-    tags: ['React', 'TypeScript', 'Feature-Based Architecture', 'Code review', 'Agile', 'Git'],
+    tags: [
+      'React',
+      'TypeScript',
+      'JavaScript',
+      'Next.js',
+      'Redux Toolkit',
+      'Zustand',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Git',
+    ],
   },
 ]

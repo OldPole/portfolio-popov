@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { GraduationCap, Languages } from '@lucide/vue'
 import { skills } from '~/data/profile'
+withDefaults(defineProps<{ numbered?: boolean }>(), { numbered: true })
 const { t } = useI18n()
 </script>
 
@@ -13,7 +14,10 @@ const { t } = useI18n()
     <div class="container">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">{{ t('skills.eyebrow') }}</p>
+          <p class="eyebrow">
+            <span v-if="numbered">02 /</span>
+            {{ t('skills.eyebrow') }}
+          </p>
           <h2 id="skills-title">{{ t('skills.title') }}</h2>
         </div>
         <p class="section-intro">{{ t('skills.intro') }}</p>

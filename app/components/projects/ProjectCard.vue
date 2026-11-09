@@ -35,6 +35,8 @@ const lang = usePortfolioLocale()
           :height="project.imageHeight"
           sizes="sm:100vw md:50vw lg:600px"
           loading="lazy"
+          densities="1x 2x"
+          quality="95"
           format="webp"
         />
       </div>

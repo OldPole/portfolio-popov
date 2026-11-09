@@ -11,6 +11,9 @@ usePortfolioSeo({
 
 <template>
   <div class="standalone-page">
-    <SectionsContact heading-tag="h1" />
+    <SectionsContact
+      heading-tag="h1"
+      :numbered="false"
+    />
   </div>
 </template>

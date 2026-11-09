@@ -4,7 +4,10 @@ import { experience } from '~/data/experience'
 import { profile } from '~/data/profile'
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale'
 
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2' }>(), { headingTag: 'h2' })
+withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
+  headingTag: 'h2',
+  numbered: true,
+})
 
 const { t } = useI18n()
 const lang = usePortfolioLocale()
@@ -18,7 +21,10 @@ const lang = usePortfolioLocale()
   >
     <div class="section-heading">
       <div>
-        <p class="eyebrow">{{ t('experience.eyebrow') }}</p>
+        <p class="eyebrow">
+          <span v-if="numbered">01 /</span>
+          {{ t('experience.eyebrow') }}
+        </p>
         <component
           :is="headingTag"
           id="experience-title"

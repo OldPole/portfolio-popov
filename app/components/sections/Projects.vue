@@ -2,7 +2,10 @@
 import { ArrowUpRight } from '@lucide/vue'
 import { projects } from '#shared/data/projects'
 import { profile } from '~/data/profile'
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2' }>(), { headingTag: 'h2' })
+withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
+  headingTag: 'h2',
+  numbered: true,
+})
 
 const { t } = useI18n()
 </script>
@@ -15,7 +18,10 @@ const { t } = useI18n()
   >
     <div class="section-heading">
       <div>
-        <p class="eyebrow">{{ t('projects.eyebrow') }}</p>
+        <p class="eyebrow">
+          <span v-if="numbered">03 /</span>
+          {{ t('projects.eyebrow') }}
+        </p>
         <component
           :is="headingTag"
           id="projects-title"

@@ -7,8 +7,8 @@ const localePath = useLocalePath()
 </script>
 
 <template>
-  <footer class="site-footer container">
-    <div class="footer-main">
+  <footer class="site-footer">
+    <div class="container footer-main">
       <div>
         <NuxtLink
           :to="localePath('/')"

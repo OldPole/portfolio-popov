@@ -10,6 +10,7 @@ const colorMode = useColorMode()
 const menuOpen = ref(false)
 const otherLocale = computed(() => (locale.value === 'en' ? 'ru' : 'en'))
 const isDark = computed(() => colorMode.value === 'dark')
+const isProjectPage = computed(() => /^\/(?:en|ru)\/projects(?:\/|$)/.test(route.path))
 const links = computed(() => [
   { label: t('nav.experience'), to: localePath('/experience') },
   { label: t('nav.projects'), to: localePath('/projects') },
@@ -50,6 +51,8 @@ watch(
       >
         {{ link.label }}
       </NuxtLink>
+    </nav>
+    <div class="header-actions">
       <UiButton
         :href="profile.cv"
         download
@@ -63,8 +66,6 @@ watch(
           aria-hidden="true"
         />
       </UiButton>
-    </nav>
-    <div class="header-actions">
       <UiButton
         :to="switchLocalePath(otherLocale)"
         variant="ghost"
@@ -103,6 +104,7 @@ watch(
         </template>
       </ClientOnly>
       <UiButton
+        v-if="!isProjectPage"
         :to="localePath('/contact')"
         size="small"
         class="header-contact"
@@ -149,13 +151,6 @@ watch(
       >
         {{ link.label }}
       </NuxtLink>
-      <a
-        :href="profile.cv"
-        download
-        @click="menuOpen = false"
-      >
-        {{ t('common.download') }}
-      </a>
       <NuxtLink
         :to="localePath('/contact')"
         @click="menuOpen = false"

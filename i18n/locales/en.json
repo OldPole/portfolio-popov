@@ -36,13 +36,13 @@
     "portrait": "Portrait of Kirill Popov"
   },
   "experience": {
-    "eyebrow": "01 / My journey",
+    "eyebrow": "My journey",
     "title": "Experience",
     "intro": "Product work, real teams, and lessons from shipping.",
     "cv": "The full story is in my CV"
   },
   "skills": {
-    "eyebrow": "02 / My toolkit",
+    "eyebrow": "My toolkit",
     "title": "Skills & background",
     "intro": "The technologies I work with, and the foundations behind them.",
     "core": "Languages & frameworks",
@@ -62,17 +62,23 @@
     "russianLevel": "Native"
   },
   "projects": {
-    "eyebrow": "03 / Selected work",
+    "eyebrow": "Selected work",
     "title": "Projects",
     "intro": "A selection of products I've helped build and ideas I've brought to life.",
     "all": "More on GitHub",
     "contribution": "My contribution",
     "highlights": "What it includes",
     "stack": "Built with",
-    "next": "Next project"
+    "next": "Next project",
+    "overview": "About the project",
+    "implementation": "How I built it",
+    "gallery": "A closer look",
+    "galleryIntro": "Explore the screens and open any screenshot at its original resolution.",
+    "openOriginal": "Open original",
+    "readme": "Read the project README"
   },
   "contact": {
-    "eyebrow": "04 / Let's talk",
+    "eyebrow": "Let's talk",
     "title": "Have something\nin mind?",
     "intro": "A product idea, a frontend role, or a project worth building together — I'd like to hear about it.",
     "emailLabel": "Drop me a line",

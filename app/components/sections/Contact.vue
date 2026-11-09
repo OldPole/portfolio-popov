@@ -3,7 +3,10 @@ import { ArrowUpRight, LoaderCircle, Send } from '@lucide/vue'
 import { profile } from '~/data/profile'
 import { useContactForm } from '~/composables/useContactForm'
 
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2' }>(), { headingTag: 'h2' })
+withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
+  headingTag: 'h2',
+  numbered: true,
+})
 
 const { t } = useI18n()
 const { form, pending, status, feedback, submit } = useContactForm()
@@ -17,7 +20,10 @@ const { form, pending, status, feedback, submit } = useContactForm()
   >
     <div class="container contact-grid">
       <div class="contact-copy">
-        <p class="eyebrow">{{ t('contact.eyebrow') }}</p>
+        <p class="eyebrow">
+          <span v-if="numbered">04 /</span>
+          {{ t('contact.eyebrow') }}
+        </p>
         <component
           :is="headingTag"
           id="contact-title"
