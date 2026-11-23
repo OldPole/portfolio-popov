@@ -1,18 +1,30 @@
 <script setup lang="ts">
 import { usePortfolioSeo } from '~/composables/usePortfolioSeo';
-import { profile } from '~/data/profile';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 import { siteOrigin } from '#shared/utils/site-origin';
 
-const { t } = useI18n();
+const lang = usePortfolioLocale();
+const profile = usePortfolioProfile();
 const config = useRuntimeConfig();
+const { data: home, error } = await useFetch('/api/portfolio');
+
+if (!home.value || error.value) {
+  throw createError({
+    statusCode: 503,
+    statusMessage: 'Portfolio content is temporarily unavailable',
+    fatal: true,
+  });
+}
 
 usePortfolioSeo({
-  title: () => t('seo.title'),
-  description: () => t('seo.description'),
+  title: () => profile.value.seo[lang.value].title,
+  description: () => profile.value.seo[lang.value].description,
 });
 
 useHead(() => {
   const origin = siteOrigin(config.public.siteUrl);
+  const { name, role, portrait, github, linkedin, telegram } = profile.value;
 
   return {
     script: [
@@ -22,16 +34,16 @@ useHead(() => {
         innerHTML: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Person',
-          name: profile.name,
-          alternateName: 'Кирилл Попов',
-          jobTitle: 'Frontend Developer',
+          name: name[lang.value],
+          alternateName: name[lang.value === 'en' ? 'ru' : 'en'],
+          jobTitle: role[lang.value],
           ...(origin
             ? {
                 url: `${origin}/en`,
-                image: `${origin}/images/kirill-popov.webp`,
+                image: new URL(portrait.src, origin).href,
               }
             : {}),
-          sameAs: [profile.github, profile.linkedin, profile.telegram],
+          sameAs: [github, linkedin, telegram],
           knowsLanguage: ['en', 'ru'],
         }).replaceAll('<', '\\u003c'),
       },
@@ -41,9 +53,15 @@ useHead(() => {
 </script>
 
 <template>
-  <SectionsHero />
-  <SectionsExperience />
-  <SectionsSkills />
-  <SectionsProjects />
-  <SectionsContact />
+  <template v-if="home">
+    <SectionsHero />
+    <SectionsExperience :experience="home.experience" />
+    <SectionsSkills
+      :skills="home.skills"
+      :education="home.education"
+      :languages="home.languages"
+    />
+    <SectionsProjects :projects="home.projects" />
+    <SectionsContact />
+  </template>
 </template>

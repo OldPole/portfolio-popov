@@ -21,33 +21,13 @@
     "top": "Наверх",
     "toggleTheme": "Переключить тему"
   },
-  "hero": {
-    "eyebrow": "Кирилл Попов",
-    "title": "Frontend Developer",
-    "description": "Разрабатываю веб-приложения на React и TypeScript. Работал над Поиском Яндекса и Чатом с Алисой, разрабатывал фронтенд Aligned Hearts.",
-    "location": "Минск, Беларусь",
-    "portrait": "Портрет Кирилла Попова"
-  },
   "experience": {
     "title": "Опыт работы"
   },
   "skills": {
     "title": "Навыки и образование",
-    "core": "Языки и фреймворки",
-    "state": "Состояние и данные",
-    "ui": "Интерфейсы и дизайн-системы",
-    "routing": "Роутинг и интеграция",
-    "quality": "Тестирование и инструменты",
     "education": "Образование",
-    "university": "Белорусский государственный университет информатики и радиоэлектроники",
-    "degree": "Бакалавриат · Геймдизайн",
-    "period": "2024 — 2028",
-    "grade": "Средний балл: 8,33",
-    "languages": "Языки",
-    "english": "Английский",
-    "englishLevel": "B1+",
-    "russian": "Русский",
-    "russianLevel": "Родной"
+    "languages": "Языки"
   },
   "projects": {
     "title": "Проекты",
@@ -90,10 +70,6 @@
     "attachmentInvalid": "Выберите файл PDF, PNG или JPG.",
     "attachmentTooLarge": "Размер вложения не должен превышать 4 МБ.",
     "attachmentChoose": "Выбрать файл"
-  },
-  "seo": {
-    "title": "Кирилл Попов — Frontend Developer",
-    "description": "Фронтенд-разработчик с фокусом на React и TypeScript. Опыт в Яндексе, Aligned Hearts и Innowise. Проекты, навыки и CV."
   },
   "error": {
     "title": "Кажется, эта страница потерялась.",

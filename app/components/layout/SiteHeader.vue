@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { Menu, Moon, Sun, X } from '@lucide/vue';
 
-import { profile } from '~/data/profile';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
 const { t, locale } = useI18n();
+const lang = usePortfolioLocale();
+const profile = usePortfolioProfile();
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 const route = useRoute();
@@ -46,9 +49,9 @@ watch(
       <NuxtLink
         :to="homePath"
         class="wordmark"
-        :aria-label="`${profile.name} — ${t('nav.home')}`"
+        :aria-label="`${profile.name[lang]} — ${t('nav.home')}`"
       >
-        kirill popov
+        {{ profile.wordmark }}
       </NuxtLink>
       <nav class="desktop-nav" :aria-label="t('common.navigation')">
         <a v-for="link in links" :key="link.href" :href="link.href">

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ArrowUpRight, Download, MapPin, Send } from '@lucide/vue';
 
-import { profile } from '~/data/profile';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
 const { t } = useI18n();
+const lang = usePortfolioLocale();
+const profile = usePortfolioProfile();
 </script>
 
 <template>
@@ -12,15 +15,15 @@ const { t } = useI18n();
       <div class="hero-topline">
         <span class="location">
           <MapPin :size="12" aria-hidden="true" />
-          {{ t('hero.location') }}
+          {{ profile.location[lang] }}
         </span>
       </div>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="hero-greeting">{{ t('hero.eyebrow') }}</p>
-          <h1 id="hero-title">{{ t('hero.title') }}</h1>
-          <p class="hero-description">{{ t('hero.description') }}</p>
+          <p class="hero-greeting">{{ profile.name[lang] }}</p>
+          <h1 id="hero-title">{{ profile.role[lang] }}</h1>
+          <p class="hero-description">{{ profile.description[lang] }}</p>
 
           <div class="hero-buttons">
             <UiButton href="#contact">
@@ -38,10 +41,10 @@ const { t } = useI18n();
         <aside class="hero-aside">
           <figure class="hero-portrait">
             <NuxtImg
-              src="/images/kirill-popov.webp"
-              :alt="t('hero.portrait')"
-              width="768"
-              height="1026"
+              :src="profile.portrait.src"
+              :alt="profile.portrait.caption[lang]"
+              :width="profile.portrait.width"
+              :height="profile.portrait.height"
               sizes="140px sm:190px md:260px xl:290px"
               format="webp"
               quality="84"
@@ -72,7 +75,7 @@ const { t } = useI18n();
               rel="noopener noreferrer"
             >
               <Send :size="15" aria-hidden="true" />
-              @OldPoleh
+              {{ profile.telegramHandle }}
               <ArrowUpRight :size="13" aria-hidden="true" />
             </a>
           </div>

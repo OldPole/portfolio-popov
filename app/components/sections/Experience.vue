@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { experience } from '~/data/experience';
+import type { PortfolioHome } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+
+defineProps<Pick<PortfolioHome, 'experience'>>();
 
 const { t } = useI18n();
 const lang = usePortfolioLocale();
@@ -19,11 +21,7 @@ const lang = usePortfolioLocale();
     </div>
 
     <div class="experience-list">
-      <article
-        v-for="job in experience"
-        :key="job.company"
-        class="experience-row"
-      >
+      <article v-for="job in experience" :key="job.key" class="experience-row">
         <div class="experience-company">
           <div class="company-icon" :class="job.className" aria-hidden="true">
             {{ job.initial }}

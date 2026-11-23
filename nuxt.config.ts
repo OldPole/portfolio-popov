@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: { siteUrl: '' },
+    databaseUrl: '',
     resendApiKey: '',
     contactFrom: '',
     contactTo: 'ipetr6828@gmail.com',
@@ -52,8 +53,6 @@ export default defineNuxtConfig({
       },
     },
     '/': { redirect: '/en' },
-    '/en': { prerender: true },
-    '/ru': { prerender: true },
     ...Object.fromEntries(
       ['en', 'ru'].flatMap(locale =>
         ['experience', 'projects', 'contact'].map(section => [
@@ -62,8 +61,6 @@ export default defineNuxtConfig({
         ]),
       ),
     ),
-    '/en/projects/**': { prerender: true },
-    '/ru/projects/**': { prerender: true },
   },
   app: {
     head: {
@@ -83,5 +80,5 @@ export default defineNuxtConfig({
     },
   },
   typescript: { strict: true },
-  nitro: { prerender: { crawlLinks: true }, compressPublicAssets: true },
+  nitro: { compressPublicAssets: true },
 });

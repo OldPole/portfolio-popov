@@ -1,24 +1,35 @@
 <script setup lang="ts">
 import { ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
 
-import { projects } from '#shared/data/projects';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 import { usePortfolioSeo } from '~/composables/usePortfolioSeo';
+
+definePageMeta({ key: route => route.path });
 
 const route = useRoute();
 const { t } = useI18n();
 const lang = usePortfolioLocale();
-
-const project = computed(() =>
-  projects.find(item => item.slug === route.params.slug),
+const profile = usePortfolioProfile();
+const slug = String(route.params.slug);
+const { data: project, error } = await useFetch(
+  `/api/portfolio/projects/${encodeURIComponent(slug)}`,
 );
 
-if (!project.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Project not found' });
+if (!project.value || error.value) {
+  const notFound = error.value?.statusCode === 404;
+
+  throw createError({
+    statusCode: notFound ? 404 : 503,
+    statusMessage: notFound
+      ? 'Project not found'
+      : 'Portfolio content is temporarily unavailable',
+    fatal: true,
+  });
 }
 
 usePortfolioSeo({
-  title: () => `${project.value?.name} — Kirill Popov`,
+  title: () => `${project.value?.name} — ${profile.value.name[lang.value]}`,
   description: () => project.value?.description[lang.value] || '',
   image: () => project.value?.image || '/images/portfolio-social.jpg',
   imageWidth: () => project.value?.imageWidth || 1200,

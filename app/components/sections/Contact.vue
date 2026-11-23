@@ -2,10 +2,11 @@
 import { ArrowUpRight, LoaderCircle, Paperclip, Send, X } from '@lucide/vue';
 
 import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
-import { profile } from '~/data/profile';
 import { useContactForm } from '~/composables/useContactForm';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
 const { t } = useI18n();
+const profile = usePortfolioProfile();
 const {
   form,
   pending,
