@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { ArrowUpRight, LoaderCircle, Send } from '@lucide/vue';
+import { ArrowUpRight, LoaderCircle, Paperclip, Send, X } from '@lucide/vue';
 
+import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
 import { profile } from '~/data/profile';
 import { useContactForm } from '~/composables/useContactForm';
 
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
-  headingTag: 'h2',
-  numbered: true,
-});
-
 const { t } = useI18n();
-const { form, pending, status, feedback, submit } = useContactForm();
+const {
+  form,
+  pending,
+  status,
+  feedback,
+  attachment,
+  chooseAttachment,
+  selectAttachment,
+  clearAttachment,
+  submit,
+} = useContactForm();
 </script>
 
 <template>
   <section id="contact" class="contact-section" aria-labelledby="contact-title">
     <div class="container contact-grid">
       <div class="contact-copy">
-        <p class="eyebrow">
-          <span v-if="numbered">04 /</span>
-          {{ t('contact.eyebrow') }}
-        </p>
-        <component :is="headingTag" id="contact-title">
+        <h2 id="contact-title">
           {{ t('contact.title') }}
-          <span class="accent">↗</span>
-        </component>
-        <p class="contact-intro">{{ t('contact.intro') }}</p>
+        </h2>
         <div class="contact-email">
           <span class="small-label">{{ t('contact.emailLabel') }}</span>
           <a :href="`mailto:${profile.email}`">
@@ -59,9 +59,9 @@ const { form, pending, status, feedback, submit } = useContactForm();
         :aria-busy="pending"
         @submit.prevent="submit"
       >
-        <component :is="headingTag === 'h1' ? 'h2' : 'h3'">
+        <h3>
           {{ t('contact.formTitle') }}
-        </component>
+        </h3>
         <div class="form-field">
           <label for="contact-name">
             {{ t('contact.name') }}
@@ -114,6 +114,47 @@ const { form, pending, status, feedback, submit } = useContactForm();
             required
             :disabled="pending"
           />
+        </div>
+
+        <div class="form-field">
+          <p class="attachment-label">{{ t('contact.attachment') }}</p>
+          <input
+            ref="attachmentInput"
+            name="attachment"
+            type="file"
+            :accept="contactAttachmentAccept"
+            :disabled="pending"
+            hidden
+            @change="selectAttachment"
+          />
+          <div class="attachment-actions" aria-live="polite">
+            <UiButton
+              variant="outline"
+              size="small"
+              aria-describedby="contact-attachment-help"
+              :disabled="pending"
+              @click="chooseAttachment"
+            >
+              <Paperclip :size="15" aria-hidden="true" />
+              {{ t('contact.attachmentChoose') }}
+            </UiButton>
+            <UiButton
+              v-if="attachment"
+              variant="outline"
+              size="small"
+              :disabled="pending"
+              @click="clearAttachment"
+            >
+              <X :size="15" aria-hidden="true" />
+              {{ t('contact.attachmentRemove') }}
+            </UiButton>
+          </div>
+          <p v-if="attachment" class="attachment-name" aria-live="polite">
+            {{ attachment.name }}
+          </p>
+          <p id="contact-attachment-help" class="attachment-help">
+            {{ t('contact.attachmentHelp') }}
+          </p>
         </div>
 
         <div class="honeypot" aria-hidden="true">

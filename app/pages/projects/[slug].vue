@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
+import { ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
 
 import { projects } from '#shared/data/projects';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
@@ -8,7 +8,6 @@ import { usePortfolioSeo } from '~/composables/usePortfolioSeo';
 const route = useRoute();
 const { t } = useI18n();
 const lang = usePortfolioLocale();
-const localePath = useLocalePath();
 
 const project = computed(() =>
   projects.find(item => item.slug === route.params.slug),
@@ -29,25 +28,12 @@ usePortfolioSeo({
 
 <template>
   <div v-if="project" class="project-page container">
-    <UiButton
-      :to="localePath('/projects')"
-      variant="text"
-      size="small"
-      class="project-back"
-    >
-      <ArrowLeft :size="16" aria-hidden="true" />
-      {{ t('common.back') }}
-    </UiButton>
-
     <div class="project-page-heading">
       <p class="eyebrow">
         {{ project.category[lang] }}
         <span v-if="project.year">/ {{ project.year }}</span>
       </p>
-      <h1>
-        {{ project.name }}
-        <span class="accent">.</span>
-      </h1>
+      <h1>{{ project.name }}</h1>
       <p class="project-lead">{{ project.description[lang] }}</p>
       <div class="project-page-actions">
         <UiButton
@@ -127,30 +113,12 @@ usePortfolioSeo({
           <p>{{ detail.body }}</p>
         </article>
       </div>
-
-      <UiButton
-        :href="`${project.repository}#readme`"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="text"
-        size="small"
-        class="project-readme"
-      >
-        {{ t('projects.readme') }}
-        <ArrowUpRight :size="14" aria-hidden="true" />
-      </UiButton>
     </section>
 
-    <section class="project-gallery" aria-labelledby="gallery-title">
-      <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
-      <p class="project-gallery-intro">{{ t('projects.galleryIntro') }}</p>
-      <div class="project-gallery-grid">
-        <ProjectsScreenshot
-          v-for="image in project.gallery"
-          :key="image.src"
-          :image="image"
-        />
-      </div>
-    </section>
+    <ProjectsGallery
+      v-if="project.gallery.length"
+      :key="project.slug"
+      :images="project.gallery"
+    />
   </div>
 </template>

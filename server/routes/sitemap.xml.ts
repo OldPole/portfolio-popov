@@ -1,5 +1,4 @@
 import { projects } from '#shared/data/projects';
-import { publicPagePaths } from '#shared/data/routes';
 import { siteOrigin } from '#shared/utils/site-origin';
 
 const escapeXml = (value: string) =>
@@ -21,10 +20,7 @@ export default defineEventHandler(event => {
 
   setResponseHeader(event, 'Content-Type', 'application/xml; charset=utf-8');
 
-  const paths = [
-    ...publicPagePaths,
-    ...projects.map(project => `/projects/${project.slug}`),
-  ];
+  const paths = ['', ...projects.map(project => `/projects/${project.slug}`)];
   const entries = paths
     .flatMap(path =>
       ['en', 'ru'].map(locale => {

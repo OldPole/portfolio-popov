@@ -11,8 +11,8 @@ export const projects: Project[] = [
       ru: 'Стартап · Командный проект',
     },
     description: {
-      en: 'A space for better conversations. An AI-powered product that helps partners work through relationship conflicts.',
-      ru: 'Пространство для диалога. Продукт с ИИ, который помогает партнёрам разбираться в конфликтах в отношениях.',
+      en: 'An AI-powered tool that helps partners talk through relationship conflicts.',
+      ru: 'Инструмент с ИИ, который помогает партнёрам обсуждать конфликты в отношениях.',
     },
     contribution: {
       en: 'Implemented profile and settings pages, room creation and messaging flows. Built reusable UI components, integrated backend APIs and real-time WebSocket communication, improved existing features and fixed production issues.',
@@ -100,11 +100,9 @@ export const projects: Project[] = [
     overview: {
       en: [
         'Aligned Hearts is a team-built product for helping partners discuss relationship conflicts. Each person shares their perspective privately; the product brings the two perspectives into a structured dialogue supported by AI analysis and personalised feedback.',
-        'I worked on the React frontend: the screens people use before entering a conversation, the room flow and the messaging interface. The gallery follows that journey from a personal profile to a shared room.',
       ],
       ru: [
         'Aligned Hearts — командный продукт, который помогает партнёрам обсуждать конфликты в отношениях. Каждый описывает ситуацию со своей стороны; продукт объединяет эти взгляды в структурированный диалог с ИИ-анализом и персональными рекомендациями.',
-        'Я занимался React-фронтендом: личными страницами пользователя, сценарием входа в комнату и интерфейсом общения. Скриншоты показывают этот путь — от профиля до совместной переписки.',
       ],
     },
     implementation: {
@@ -195,11 +193,9 @@ export const projects: Project[] = [
     overview: {
       en: [
         'Next Ecommerce is a storefront built with Next.js App Router and the DummyJSON API. The browsing flow connects a searchable product catalog, category filters, individual product pages and a persistent shopping cart.',
-        'The project combines server-rendered catalog pages with incremental regeneration for product details. A responsive interface built with Tailwind CSS and shadcn/ui keeps the same browsing flow available across screen sizes.',
       ],
       ru: [
         'Next Ecommerce — интернет-магазин на Next.js App Router с данными DummyJSON API. Пользовательский сценарий связывает каталог с поиском и фильтрами, отдельные страницы товаров и корзину с сохранением состояния.',
-        'В проекте сочетаются серверный рендеринг каталога и ISR для страниц товаров. Адаптивный интерфейс на Tailwind CSS и shadcn/ui сохраняет этот сценарий на экранах разного размера.',
       ],
     },
     implementation: {

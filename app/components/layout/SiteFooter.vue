@@ -5,31 +5,22 @@ import { profile } from '~/data/profile';
 
 const { t } = useI18n();
 const localePath = useLocalePath();
+const homePath = computed(() => localePath('/'));
 </script>
 
 <template>
   <footer class="site-footer">
     <div class="container footer-main">
       <div>
-        <NuxtLink :to="localePath('/')" class="wordmark">
-          kirill popov
-          <span>.</span>
-        </NuxtLink>
-        <p class="footer-description">{{ t('footer.description') }}</p>
+        <NuxtLink :to="homePath" class="wordmark">kirill popov</NuxtLink>
       </div>
 
       <div class="footer-links">
         <span class="small-label">{{ t('common.navigation') }}</span>
-        <NuxtLink :to="localePath('/experience')">
-          {{ t('nav.experience') }}
-        </NuxtLink>
-        <NuxtLink :to="localePath('/projects')">
-          {{ t('nav.projects') }}
-        </NuxtLink>
-        <NuxtLink :to="localePath('/contact')">{{ t('nav.contact') }}</NuxtLink>
-        <a :href="profile.cv" download>
-          {{ t('common.download') }}
-        </a>
+        <a :href="`${homePath}#experience`">{{ t('nav.experience') }}</a>
+        <a :href="`${homePath}#skills`">{{ t('nav.skills') }}</a>
+        <a :href="`${homePath}#projects`">{{ t('nav.projects') }}</a>
+        <a :href="`${homePath}#contact`">{{ t('nav.contact') }}</a>
       </div>
 
       <div class="footer-links">

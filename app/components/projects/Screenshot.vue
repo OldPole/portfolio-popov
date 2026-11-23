@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { Expand } from '@lucide/vue';
-
 import type { ProjectImage } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
 withDefaults(
-  defineProps<{ image: ProjectImage; accent?: string; priority?: boolean }>(),
+  defineProps<{
+    image: ProjectImage;
+    accent?: string;
+    priority?: boolean;
+    showCaption?: boolean;
+  }>(),
   {
     accent: undefined,
     priority: false,
+    showCaption: true,
   },
 );
 
-const { t } = useI18n();
 const lang = usePortfolioLocale();
 </script>
 
@@ -24,13 +27,7 @@ const lang = usePortfolioLocale();
       '--screenshot-accent': accent,
     }"
   >
-    <a
-      :href="image.src"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="screenshot-frame"
-      :aria-label="`${image.caption[lang]} — ${t('projects.openOriginal')}`"
-    >
+    <div class="screenshot-frame">
       <NuxtImg
         :src="image.src"
         :alt="image.caption[lang]"
@@ -44,19 +41,9 @@ const lang = usePortfolioLocale();
         :fetchpriority="priority ? 'high' : 'auto'"
         :preload="priority"
       />
-    </a>
-    <figcaption class="screenshot-caption">
-      <span>{{ image.caption[lang] }}</span>
-      <UiButton
-        :href="image.src"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="ghost"
-        size="small"
-      >
-        {{ t('projects.openOriginal') }}
-        <Expand :size="14" aria-hidden="true" />
-      </UiButton>
+    </div>
+    <figcaption v-if="showCaption" class="screenshot-caption">
+      {{ image.caption[lang] }}
     </figcaption>
   </figure>
 </template>

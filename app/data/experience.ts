@@ -7,20 +7,22 @@ export const experience = [
     role: { en: 'Frontend Developer Intern', ru: 'Стажёр Frontend Developer' },
     period: { en: 'Jul — Sep 2026', ru: 'Июль — сентябрь 2026' },
     description: {
-      en: 'Built production features for Yandex Search and Alice Chat on the Search Interfaces team.',
-      ru: 'Разрабатывал продуктовые функции Поиска Яндекса и Чата с Алисой в команде интерфейсов Поиска.',
+      en: 'Worked on the Search Interfaces team, building and releasing features for Yandex Search and Alice Chat.',
+      ru: 'В команде интерфейсов Поиска разрабатывал и выпускал функции Поиска Яндекса и Чата с Алисой.',
     },
     points: {
       en: [
-        'Implemented user-facing frontend features for Yandex Search and Alice Chat, taking tasks from development through to production.',
+        'Developed the “My Memory” interface in Yandex Alice, where users can view and edit saved notes, lists and reminders.',
+        'Took the initiative to build a confetti effect from scratch and integrate it into the project. The effect supports configurable particle count, colours, shapes and spread patterns.',
         'Wrote automated tests to check feature behaviour and protect existing interfaces against regressions.',
-        'Participated in A/B experiments and feature-flag rollouts as part of the end-to-end release process.',
+        'Participated in A/B experiments and gradual rollouts using feature flags.',
         'Investigated and resolved UI regressions in the production Search and Alice interfaces.',
       ],
       ru: [
-        'Реализовывал пользовательские функции Поиска Яндекса и Чата с Алисой, доводил задачи от разработки до выпуска в продакшен.',
+        'Разработал интерфейс раздела «Моя память» в Яндекс Алисе, где пользователи просматривают и редактируют сохранённые заметки, списки и напоминания.',
+        'По собственной инициативе написал с нуля и встроил в проект эффект конфетти. В нём можно настроить количество, цвет и форму частиц, а также схему разлёта.',
         'Писал автоматизированные тесты для проверки новых функций и защиты существующих интерфейсов от регрессий.',
-        'Участвовал в A/B-экспериментах и постепенном включении функций через фичефлаги в рамках полного цикла релиза.',
+        'Участвовал в A/B-экспериментах и поэтапном выпуске функций через фичефлаги.',
         'Находил и исправлял UI-регрессии в продуктовых интерфейсах Поиска и Алисы.',
       ],
     },
@@ -49,14 +51,14 @@ export const experience = [
     points: {
       en: [
         'Built profile and settings pages with React and TypeScript.',
-        'Implemented room creation and messaging flows for the relationship conflict resolution product.',
+        'Implemented room creation and messaging.',
         'Created reusable UI components shared across product screens.',
         'Connected the frontend to backend APIs and integrated real-time communication through WebSockets.',
-        'Improved existing features and fixed production issues to keep the product working reliably.',
+        'Improved existing features and fixed production issues.',
       ],
       ru: [
         'Разработал страницы профиля и настроек на React и TypeScript.',
-        'Реализовал создание комнат и сценарии обмена сообщениями в продукте для решения конфликтов в отношениях.',
+        'Реализовал создание комнат и обмен сообщениями.',
         'Создавал переиспользуемые UI-компоненты для разных экранов продукта.',
         'Интегрировал фронтенд с API бэкенда и подключил общение в реальном времени через WebSocket.',
         'Дорабатывал существующие функции и исправлял ошибки в продакшене.',
@@ -86,14 +88,12 @@ export const experience = [
     },
     points: {
       en: [
-        'Built web applications from scratch using React and TypeScript during a team-based internship.',
         'Implemented production-ready application features and complex business logic.',
         'Improved and extended existing functionality as product requirements evolved.',
         'Organised application code using Feature-Based Architecture.',
         'Participated in code reviews and worked with Agile methodologies in a team environment.',
       ],
       ru: [
-        'Создавал веб-приложения с нуля на React и TypeScript в рамках командной стажировки.',
         'Реализовывал готовые к продакшену функции приложений и сложную бизнес-логику.',
         'Улучшал и расширял существующие возможности приложений по требованиям продукта.',
         'Организовывал код с использованием Feature-Based Architecture.',

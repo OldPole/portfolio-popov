@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "experience": "Experience",
+    "skills": "Skills",
     "projects": "Projects",
     "contact": "Get in touch",
     "menu": "Toggle navigation",
@@ -12,39 +13,26 @@
     "viewCode": "Source code",
     "liveDemo": "Live demo",
     "details": "Explore project",
-    "back": "All projects",
-    "light": "Switch to light theme",
-    "dark": "Switch to dark theme",
     "language": "Switch to Russian",
     "screenshot": "Screenshot of {name}",
     "navigation": "Navigation",
     "socials": "Find me elsewhere",
     "close": "Close",
-    "top": "Back to top"
+    "top": "Back to top",
+    "toggleTheme": "Toggle colour theme"
   },
   "hero": {
-    "eyebrow": "Hi, I'm Kirill",
+    "eyebrow": "Kirill Popov",
     "title": "Frontend Developer",
-    "subtitle": "Thoughtful interfaces.\nSolid engineering.",
-    "description": "I build web applications with React and TypeScript — from the first component to production. My experience spans startup products and frontend work at Yandex.",
-    "description2": "I enjoy turning complex product requirements into clear, maintainable interfaces, connecting APIs and making real-time interactions feel natural.",
-    "work": "Explore my work",
+    "description": "I build web applications with React and TypeScript. I worked on Yandex Search and Alice Chat and built the frontend for Aligned Hearts.",
     "location": "Based in Minsk, Belarus",
-    "focus": "My focus",
-    "focusValue": "React & TypeScript",
-    "index": "Personal portfolio / 2026",
     "portrait": "Portrait of Kirill Popov"
   },
   "experience": {
-    "eyebrow": "My journey",
-    "title": "Experience",
-    "intro": "Product work, real teams, and lessons from shipping.",
-    "cv": "The full story is in my CV"
+    "title": "Experience"
   },
   "skills": {
-    "eyebrow": "My toolkit",
     "title": "Skills & background",
-    "intro": "The technologies I work with, and the foundations behind them.",
     "core": "Languages & frameworks",
     "state": "State & data",
     "ui": "Interface & design systems",
@@ -62,9 +50,7 @@
     "russianLevel": "Native"
   },
   "projects": {
-    "eyebrow": "Selected work",
     "title": "Projects",
-    "intro": "A selection of products I've helped build and ideas I've brought to life.",
     "all": "More on GitHub",
     "contribution": "My contribution",
     "highlights": "What it includes",
@@ -72,15 +58,14 @@
     "next": "Next project",
     "overview": "About the project",
     "implementation": "How I built it",
-    "gallery": "A closer look",
-    "galleryIntro": "Explore the screens and open any screenshot at its original resolution.",
-    "openOriginal": "Open original",
-    "readme": "Read the project README"
+    "gallery": "Screenshots",
+    "previousScreenshot": "Previous screenshot",
+    "nextScreenshot": "Next screenshot",
+    "screenshotPreviews": "Screenshot previews",
+    "showScreenshot": "Show screenshot {number}: {name}"
   },
   "contact": {
-    "eyebrow": "Let's talk",
-    "title": "Have something\nin mind?",
-    "intro": "A product idea, a frontend role, or a project worth building together — I'd like to hear about it.",
+    "title": "Contact",
     "emailLabel": "Drop me a line",
     "formTitle": "Send me a message",
     "name": "Your name",
@@ -97,19 +82,18 @@
     "invalid": "Please check your name, email and message.",
     "rateLimit": "Too many attempts. Please wait a few minutes or contact me directly.",
     "alternative": "Prefer a chat? Find me on Telegram",
-    "privacy": "Your name, email and message are used only to reply to your enquiry.",
-    "website": "Leave this field empty"
-  },
-  "footer": {
-    "description": "Frontend developer. React & TypeScript.\nBased in Minsk, building for the web."
+    "privacy": "Your details and any attachment are used to reply to your enquiry.",
+    "website": "Leave this field empty",
+    "attachment": "Attachment (optional)",
+    "attachmentHelp": "One PDF, PNG or JPG, up to 4 MB.",
+    "attachmentRemove": "Remove file",
+    "attachmentInvalid": "Choose a valid PDF, PNG or JPG file.",
+    "attachmentTooLarge": "The attachment must be 4 MB or smaller.",
+    "attachmentChoose": "Choose file"
   },
   "seo": {
     "title": "Kirill Popov — Frontend Developer",
-    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV.",
-    "name": "Kirill Popov",
-    "experience": "Frontend experience at Yandex, Aligned Hearts and Innowise: responsibilities, technologies, skills, education and a downloadable CV.",
-    "projects": "Explore Aligned Hearts, Next Ecommerce and SeriesPoisk: screenshots, frontend contributions, source code and available live demos.",
-    "contact": "Contact Kirill Popov about frontend roles or projects by email, Telegram, LinkedIn or the contact form."
+    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV."
   },
   "error": {
     "title": "This page took a wrong turn.",

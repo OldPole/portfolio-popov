@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import { ArrowDownToLine, ArrowUpRight } from '@lucide/vue';
-
 import { experience } from '~/data/experience';
-import { profile } from '~/data/profile';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
-
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
-  headingTag: 'h2',
-  numbered: true,
-});
 
 const { t } = useI18n();
 const lang = usePortfolioLocale();
@@ -21,17 +13,9 @@ const lang = usePortfolioLocale();
     aria-labelledby="experience-title"
   >
     <div class="section-heading">
-      <div>
-        <p class="eyebrow">
-          <span v-if="numbered">01 /</span>
-          {{ t('experience.eyebrow') }}
-        </p>
-        <component :is="headingTag" id="experience-title">
-          {{ t('experience.title') }}
-        </component>
-      </div>
-
-      <p class="section-intro">{{ t('experience.intro') }}</p>
+      <h2 id="experience-title">
+        {{ t('experience.title') }}
+      </h2>
     </div>
 
     <div class="experience-list">
@@ -46,18 +30,18 @@ const lang = usePortfolioLocale();
           </div>
 
           <div>
-            <component :is="headingTag === 'h1' ? 'h2' : 'h3'">
+            <h3>
               {{ job.company }}
-            </component>
-            <span class="muted text-sm">{{ job.location[lang] }}</span>
+            </h3>
+            <span class="company-location">{{ job.location[lang] }}</span>
           </div>
         </div>
 
         <div class="experience-detail">
           <div class="experience-title">
-            <component :is="headingTag === 'h1' ? 'h3' : 'h4'">
+            <h4>
               {{ job.role[lang] }}
-            </component>
+            </h4>
             <span class="date-label">{{ job.period[lang] }}</span>
           </div>
 
@@ -75,16 +59,5 @@ const lang = usePortfolioLocale();
         </div>
       </article>
     </div>
-
-    <a :href="profile.cv" download class="cv-strip">
-      <span>
-        <ArrowDownToLine :size="18" aria-hidden="true" />
-        {{ t('experience.cv') }}
-      </span>
-      <span>
-        {{ t('common.download') }}
-        <ArrowUpRight :size="16" aria-hidden="true" />
-      </span>
-    </a>
   </section>
 </template>

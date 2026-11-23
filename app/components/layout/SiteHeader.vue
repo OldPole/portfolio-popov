@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUpRight, Download, Menu, Moon, Sun, X } from '@lucide/vue';
+import { Menu, Moon, Sun, X } from '@lucide/vue';
 
 import { profile } from '~/data/profile';
 
@@ -7,16 +7,27 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 const route = useRoute();
+const homePath = computed(() => localePath('/'));
 const colorMode = useColorMode();
 
 const menuOpen = ref(false);
+const mounted = ref(false);
 
 const otherLocale = computed(() => (locale.value === 'en' ? 'ru' : 'en'));
-const isDark = computed(() => colorMode.value === 'dark');
+const languagePath = computed(() => {
+  const path = switchLocalePath(otherLocale.value);
+
+  return mounted.value ? path : path.replace(/#.*$/, '');
+});
 const links = computed(() => [
-  { label: t('nav.experience'), to: localePath('/experience') },
-  { label: t('nav.projects'), to: localePath('/projects') },
+  { label: t('nav.experience'), href: `${homePath.value}#experience` },
+  { label: t('nav.skills'), href: `${homePath.value}#skills` },
+  { label: t('nav.projects'), href: `${homePath.value}#projects` },
 ]);
+
+onMounted(() => {
+  mounted.value = true;
+});
 
 watch(
   () => route.fullPath,
@@ -31,82 +42,58 @@ watch(
     {{ t('nav.skip') }}
   </a>
   <header class="site-header">
-    <NuxtLink
-      :to="localePath('/')"
-      class="wordmark"
-      :aria-label="`${profile.name} — ${t('nav.home')}`"
-    >
-      kirill popov
-      <span>.</span>
-    </NuxtLink>
-    <nav class="desktop-nav" :aria-label="t('common.navigation')">
-      <NuxtLink v-for="link in links" :key="link.to" :to="link.to">
-        {{ link.label }}
+    <div class="container header-inner">
+      <NuxtLink
+        :to="homePath"
+        class="wordmark"
+        :aria-label="`${profile.name} — ${t('nav.home')}`"
+      >
+        kirill popov
       </NuxtLink>
-    </nav>
+      <nav class="desktop-nav" :aria-label="t('common.navigation')">
+        <a v-for="link in links" :key="link.href" :href="link.href">
+          {{ link.label }}
+        </a>
+      </nav>
 
-    <div class="header-actions">
-      <UiButton
-        :href="profile.cv"
-        download
-        variant="ghost"
-        size="small"
-        class="nav-cv"
-      >
-        CV
-        <Download :size="13" aria-hidden="true" />
-      </UiButton>
+      <div class="header-actions">
+        <UiButton
+          :to="languagePath"
+          variant="ghost"
+          size="icon"
+          class="language-toggle"
+          :aria-label="`${otherLocale.toUpperCase()} — ${t('common.language')}`"
+        >
+          {{ otherLocale.toUpperCase() }}
+        </UiButton>
 
-      <UiButton
-        :to="switchLocalePath(otherLocale)"
-        variant="ghost"
-        size="icon"
-        class="language-toggle"
-        :aria-label="`${otherLocale.toUpperCase()} — ${t('common.language')}`"
-      >
-        {{ otherLocale.toUpperCase() }}
-      </UiButton>
-
-      <ClientOnly>
         <UiButton
           variant="ghost"
           size="icon"
           class="theme-toggle"
-          :aria-label="t(isDark ? 'common.light' : 'common.dark')"
-          @click="colorMode.preference = isDark ? 'light' : 'dark'"
+          :aria-label="t('common.toggleTheme')"
+          @click="
+            colorMode.preference =
+              colorMode.value === 'light' ? 'dark' : 'light'
+          "
         >
-          <Sun v-if="isDark" :size="17" aria-hidden="true" />
-          <Moon v-else :size="17" aria-hidden="true" />
+          <Sun class="theme-icon-sun" :size="17" aria-hidden="true" />
+          <Moon class="theme-icon-moon" :size="17" aria-hidden="true" />
         </UiButton>
 
-        <template #fallback>
-          <span class="button button-ghost button-icon" aria-hidden="true">
-            <Moon :size="17" />
-          </span>
-        </template>
-      </ClientOnly>
-
-      <UiButton
-        :to="localePath('/contact')"
-        size="small"
-        class="header-contact"
-      >
-        {{ t('nav.contact') }}
-        <ArrowUpRight :size="15" aria-hidden="true" />
-      </UiButton>
-
-      <UiButton
-        variant="ghost"
-        size="icon"
-        class="mobile-menu-toggle"
-        :aria-label="t('nav.menu')"
-        :aria-expanded="menuOpen"
-        aria-controls="mobile-navigation"
-        @click="menuOpen = !menuOpen"
-      >
-        <X v-if="menuOpen" :size="21" aria-hidden="true" />
-        <Menu v-else :size="21" aria-hidden="true" />
-      </UiButton>
+        <UiButton
+          variant="ghost"
+          size="icon"
+          class="mobile-menu-toggle"
+          :aria-label="t('nav.menu')"
+          :aria-expanded="menuOpen"
+          aria-controls="mobile-navigation"
+          @click="menuOpen = !menuOpen"
+        >
+          <X v-if="menuOpen" :size="21" aria-hidden="true" />
+          <Menu v-else :size="21" aria-hidden="true" />
+        </UiButton>
+      </div>
     </div>
 
     <nav
@@ -116,17 +103,19 @@ watch(
       :aria-label="t('common.navigation')"
       @keydown.esc="menuOpen = false"
     >
-      <NuxtLink
-        v-for="link in links"
-        :key="link.to"
-        :to="link.to"
-        @click="menuOpen = false"
-      >
-        {{ link.label }}
-      </NuxtLink>
-      <NuxtLink :to="localePath('/contact')" @click="menuOpen = false">
-        {{ t('nav.contact') }}
-      </NuxtLink>
+      <div class="container mobile-nav-links">
+        <a
+          v-for="link in links"
+          :key="link.href"
+          :href="link.href"
+          @click="menuOpen = false"
+        >
+          {{ link.label }}
+        </a>
+        <a :href="`${homePath}#contact`" @click="menuOpen = false">
+          {{ t('nav.contact') }}
+        </a>
+      </div>
     </nav>
   </header>
 </template>
