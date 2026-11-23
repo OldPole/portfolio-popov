@@ -4,11 +4,6 @@ import { ArrowUpRight, LoaderCircle, Send } from '@lucide/vue';
 import { profile } from '~/data/profile';
 import { useContactForm } from '~/composables/useContactForm';
 
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
-  headingTag: 'h2',
-  numbered: true,
-});
-
 const { t } = useI18n();
 const { form, pending, status, feedback, submit } = useContactForm();
 </script>
@@ -18,13 +13,12 @@ const { form, pending, status, feedback, submit } = useContactForm();
     <div class="container contact-grid">
       <div class="contact-copy">
         <p class="eyebrow">
-          <span v-if="numbered">04 /</span>
+          04 /
           {{ t('contact.eyebrow') }}
         </p>
-        <component :is="headingTag" id="contact-title">
+        <h2 id="contact-title">
           {{ t('contact.title') }}
-          <span class="accent">↗</span>
-        </component>
+        </h2>
         <p class="contact-intro">{{ t('contact.intro') }}</p>
         <div class="contact-email">
           <span class="small-label">{{ t('contact.emailLabel') }}</span>
@@ -59,9 +53,9 @@ const { form, pending, status, feedback, submit } = useContactForm();
         :aria-busy="pending"
         @submit.prevent="submit"
       >
-        <component :is="headingTag === 'h1' ? 'h2' : 'h3'">
+        <h3>
           {{ t('contact.formTitle') }}
-        </component>
+        </h3>
         <div class="form-field">
           <label for="contact-name">
             {{ t('contact.name') }}

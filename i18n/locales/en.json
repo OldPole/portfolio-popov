@@ -105,11 +105,7 @@
   },
   "seo": {
     "title": "Kirill Popov — Frontend Developer",
-    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV.",
-    "name": "Kirill Popov",
-    "experience": "Frontend experience at Yandex, Aligned Hearts and Innowise: responsibilities, technologies, skills, education and a downloadable CV.",
-    "projects": "Explore Aligned Hearts, Next Ecommerce and SeriesPoisk: screenshots, frontend contributions, source code and available live demos.",
-    "contact": "Contact Kirill Popov about frontend roles or projects by email, Telegram, LinkedIn or the contact form."
+    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV."
   },
   "error": {
     "title": "This page took a wrong turn.",

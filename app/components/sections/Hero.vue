@@ -4,7 +4,6 @@ import { ArrowUpRight, Download, MapPin, Send } from '@lucide/vue';
 import { profile } from '~/data/profile';
 
 const { t } = useI18n();
-const localePath = useLocalePath();
 </script>
 
 <template>
@@ -20,21 +19,15 @@ const localePath = useLocalePath();
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="hero-greeting">
-            <span class="hello-dot" />
-            {{ t('hero.eyebrow') }}
-          </p>
-          <h1 id="hero-title">
-            {{ t('hero.title') }}
-            <span class="accent">.</span>
-          </h1>
+          <p class="hero-greeting">{{ t('hero.eyebrow') }}</p>
+          <h1 id="hero-title">{{ t('hero.title') }}</h1>
           <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
           <p class="hero-description">{{ t('hero.description') }}</p>
           <p class="hero-description secondary-description">
             {{ t('hero.description2') }}
           </p>
           <div class="hero-buttons">
-            <UiButton :to="localePath('/projects')">
+            <UiButton href="#projects">
               {{ t('hero.work') }}
               <ArrowUpRight :size="17" aria-hidden="true" />
             </UiButton>

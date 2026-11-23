@@ -4,12 +4,7 @@ import { ArrowUpRight, ExternalLink } from '@lucide/vue';
 import type { Project } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
-withDefaults(
-  defineProps<{ project: Project; index: number; headingTag?: 'h2' | 'h3' }>(),
-  {
-    headingTag: 'h3',
-  },
-);
+defineProps<{ project: Project; index: number }>();
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -26,10 +21,7 @@ const lang = usePortfolioLocale();
     >
       <div class="project-browser">
         <div class="browser-chrome" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <i>{{ project.name }}</i>
+          <span>{{ project.name }}</span>
         </div>
 
         <NuxtImg
@@ -56,12 +48,12 @@ const lang = usePortfolioLocale();
       <span>{{ project.year }}</span>
     </div>
 
-    <component :is="headingTag">
+    <h3>
       <NuxtLink :to="localePath(`/projects/${project.slug}`)">
         {{ project.name }}
         <ArrowUpRight :size="22" aria-hidden="true" />
       </NuxtLink>
-    </component>
+    </h3>
     <p class="project-description">{{ project.description[lang] }}</p>
     <div v-if="project.stack.length" class="tag-list project-tags">
       <span v-for="tag in project.stack" :key="tag" class="tag tag-subtle">

@@ -5,28 +5,22 @@ import { profile } from '~/data/profile';
 
 const { t } = useI18n();
 const localePath = useLocalePath();
+const homePath = computed(() => localePath('/'));
 </script>
 
 <template>
   <footer class="site-footer">
     <div class="container footer-main">
       <div>
-        <NuxtLink :to="localePath('/')" class="wordmark">
-          kirill popov
-          <span>.</span>
-        </NuxtLink>
+        <NuxtLink :to="homePath" class="wordmark">kirill popov</NuxtLink>
         <p class="footer-description">{{ t('footer.description') }}</p>
       </div>
 
       <div class="footer-links">
         <span class="small-label">{{ t('common.navigation') }}</span>
-        <NuxtLink :to="localePath('/experience')">
-          {{ t('nav.experience') }}
-        </NuxtLink>
-        <NuxtLink :to="localePath('/projects')">
-          {{ t('nav.projects') }}
-        </NuxtLink>
-        <NuxtLink :to="localePath('/contact')">{{ t('nav.contact') }}</NuxtLink>
+        <a :href="`${homePath}#experience`">{{ t('nav.experience') }}</a>
+        <a :href="`${homePath}#projects`">{{ t('nav.projects') }}</a>
+        <a :href="`${homePath}#contact`">{{ t('nav.contact') }}</a>
         <a :href="profile.cv" download>
           {{ t('common.download') }}
         </a>

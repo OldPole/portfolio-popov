@@ -3,8 +3,6 @@ import { GraduationCap, Languages } from '@lucide/vue';
 
 import { skills } from '~/data/profile';
 
-withDefaults(defineProps<{ numbered?: boolean }>(), { numbered: true });
-
 const { t } = useI18n();
 </script>
 
@@ -18,7 +16,7 @@ const { t } = useI18n();
       <div class="section-heading">
         <div>
           <p class="eyebrow">
-            <span v-if="numbered">02 /</span>
+            02 /
             {{ t('skills.eyebrow') }}
           </p>
           <h2 id="skills-title">{{ t('skills.title') }}</h2>
@@ -37,10 +35,6 @@ const { t } = useI18n();
                 :key="skill"
                 class="tag skill-tag"
               >
-                <span
-                  v-if="['React', 'Next.js', 'TypeScript'].includes(skill)"
-                  class="skill-dot"
-                />
                 {{ skill }}
               </span>
             </div>

@@ -30,7 +30,7 @@ usePortfolioSeo({
 <template>
   <div v-if="project" class="project-page container">
     <UiButton
-      :to="localePath('/projects')"
+      :href="`${localePath('/')}#projects`"
       variant="text"
       size="small"
       class="project-back"
@@ -44,10 +44,7 @@ usePortfolioSeo({
         {{ project.category[lang] }}
         <span v-if="project.year">/ {{ project.year }}</span>
       </p>
-      <h1>
-        {{ project.name }}
-        <span class="accent">.</span>
-      </h1>
+      <h1>{{ project.name }}</h1>
       <p class="project-lead">{{ project.description[lang] }}</p>
       <div class="project-page-actions">
         <UiButton

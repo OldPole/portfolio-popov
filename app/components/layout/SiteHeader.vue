@@ -7,6 +7,7 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 const route = useRoute();
+const homePath = computed(() => localePath('/'));
 const colorMode = useColorMode();
 
 const menuOpen = ref(false);
@@ -14,8 +15,8 @@ const menuOpen = ref(false);
 const otherLocale = computed(() => (locale.value === 'en' ? 'ru' : 'en'));
 const isDark = computed(() => colorMode.value === 'dark');
 const links = computed(() => [
-  { label: t('nav.experience'), to: localePath('/experience') },
-  { label: t('nav.projects'), to: localePath('/projects') },
+  { label: t('nav.experience'), href: `${homePath.value}#experience` },
+  { label: t('nav.projects'), href: `${homePath.value}#projects` },
 ]);
 
 watch(
@@ -32,17 +33,16 @@ watch(
   </a>
   <header class="site-header">
     <NuxtLink
-      :to="localePath('/')"
+      :to="homePath"
       class="wordmark"
       :aria-label="`${profile.name} — ${t('nav.home')}`"
     >
       kirill popov
-      <span>.</span>
     </NuxtLink>
     <nav class="desktop-nav" :aria-label="t('common.navigation')">
-      <NuxtLink v-for="link in links" :key="link.to" :to="link.to">
+      <a v-for="link in links" :key="link.href" :href="link.href">
         {{ link.label }}
-      </NuxtLink>
+      </a>
     </nav>
 
     <div class="header-actions">
@@ -87,7 +87,7 @@ watch(
       </ClientOnly>
 
       <UiButton
-        :to="localePath('/contact')"
+        :href="`${homePath}#contact`"
         size="small"
         class="header-contact"
       >
@@ -116,17 +116,17 @@ watch(
       :aria-label="t('common.navigation')"
       @keydown.esc="menuOpen = false"
     >
-      <NuxtLink
+      <a
         v-for="link in links"
-        :key="link.to"
-        :to="link.to"
+        :key="link.href"
+        :href="link.href"
         @click="menuOpen = false"
       >
         {{ link.label }}
-      </NuxtLink>
-      <NuxtLink :to="localePath('/contact')" @click="menuOpen = false">
+      </a>
+      <a :href="`${homePath}#contact`" @click="menuOpen = false">
         {{ t('nav.contact') }}
-      </NuxtLink>
+      </a>
     </nav>
   </header>
 </template>

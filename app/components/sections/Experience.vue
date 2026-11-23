@@ -5,11 +5,6 @@ import { experience } from '~/data/experience';
 import { profile } from '~/data/profile';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
-withDefaults(defineProps<{ headingTag?: 'h1' | 'h2'; numbered?: boolean }>(), {
-  headingTag: 'h2',
-  numbered: true,
-});
-
 const { t } = useI18n();
 const lang = usePortfolioLocale();
 </script>
@@ -23,12 +18,12 @@ const lang = usePortfolioLocale();
     <div class="section-heading">
       <div>
         <p class="eyebrow">
-          <span v-if="numbered">01 /</span>
+          01 /
           {{ t('experience.eyebrow') }}
         </p>
-        <component :is="headingTag" id="experience-title">
+        <h2 id="experience-title">
           {{ t('experience.title') }}
-        </component>
+        </h2>
       </div>
 
       <p class="section-intro">{{ t('experience.intro') }}</p>
@@ -46,18 +41,18 @@ const lang = usePortfolioLocale();
           </div>
 
           <div>
-            <component :is="headingTag === 'h1' ? 'h2' : 'h3'">
+            <h3>
               {{ job.company }}
-            </component>
+            </h3>
             <span class="muted text-sm">{{ job.location[lang] }}</span>
           </div>
         </div>
 
         <div class="experience-detail">
           <div class="experience-title">
-            <component :is="headingTag === 'h1' ? 'h3' : 'h4'">
+            <h4>
               {{ job.role[lang] }}
-            </component>
+            </h4>
             <span class="date-label">{{ job.period[lang] }}</span>
           </div>
 

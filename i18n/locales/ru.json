@@ -105,11 +105,7 @@
   },
   "seo": {
     "title": "Кирилл Попов — Frontend Developer",
-    "description": "Фронтенд-разработчик с фокусом на React и TypeScript. Опыт в Яндексе, Aligned Hearts и Innowise. Проекты, навыки и CV.",
-    "name": "Кирилл Попов",
-    "experience": "Опыт фронтенд-разработки в Яндексе, Aligned Hearts и Innowise: задачи, технологии, навыки, образование и CV для скачивания.",
-    "projects": "Aligned Hearts, Next Ecommerce и SeriesPoisk: скриншоты, мой вклад во фронтенд, исходный код и доступные демо проектов.",
-    "contact": "Свяжитесь с Кириллом Поповым по поводу работы или проекта: почта, Telegram, LinkedIn и контактная форма."
+    "description": "Фронтенд-разработчик с фокусом на React и TypeScript. Опыт в Яндексе, Aligned Hearts и Innowise. Проекты, навыки и CV."
   },
   "error": {
     "title": "Кажется, эта страница потерялась.",
