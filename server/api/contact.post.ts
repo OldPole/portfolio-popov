@@ -1,11 +1,11 @@
 import { Buffer } from 'node:buffer';
-import type { IncomingMessage } from 'node:http';
 import { z } from 'zod';
 
 import {
   contactAttachmentMaxBytes,
   contactAttachmentMime,
 } from '#shared/utils/contact-attachment';
+import { readLimitedBody } from '../utils/read-limited-body';
 
 const schema = z
   .object({
@@ -26,30 +26,6 @@ const fileSignatures = {
   'image/png': Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
   'image/jpeg': Buffer.from([0xff, 0xd8, 0xff]),
 };
-
-async function readLimitedBody(request: IncomingMessage, limit: number) {
-  const chunks: Buffer[] = [];
-  let size = 0;
-
-  for await (const chunk of request.iterator({ destroyOnReturn: false })) {
-    const bytes: Buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-
-    size += bytes.byteLength;
-
-    if (size > limit) {
-      request.resume();
-
-      throw createError({
-        statusCode: 413,
-        statusMessage: 'Message too large',
-      });
-    }
-
-    chunks.push(bytes);
-  }
-
-  return Buffer.concat(chunks, size);
-}
 
 async function prepareAttachment(file?: File) {
   if (!file) {
@@ -142,7 +118,11 @@ export default defineEventHandler(async event => {
     attempts.set(ip, { count: 1, expires: now + WINDOW });
   }
 
-  const payload = await readLimitedBody(event.node.req, bodyLimit);
+  const payload = await readLimitedBody(
+    event.node.req,
+    bodyLimit,
+    'Message too large',
+  );
   let body: unknown;
   let file: File | undefined;
 

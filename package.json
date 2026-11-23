@@ -8,6 +8,9 @@
     "dev": "nuxt dev --host 127.0.0.1",
     "build": "nuxt build",
     "preview": "nuxt preview --host 127.0.0.1",
+    "db:setup": "node --env-file-if-exists=.env scripts/database.mjs setup",
+    "db:migrate": "node --env-file-if-exists=.env scripts/database.mjs migrate",
+    "db:seed": "node --env-file-if-exists=.env scripts/database.mjs seed",
     "typecheck": "nuxt typecheck",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
@@ -22,6 +25,8 @@
     "@nuxtjs/i18n": "^10.6.0",
     "@tailwindcss/vite": "^4.3.5",
     "nuxt": "^4.6.4",
+    "pg": "^8.23.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.5",
     "vue": "^3.5.0",
     "zod": "^4.0.0"
@@ -29,6 +34,7 @@
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
     "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.0.0",

@@ -1,5 +1,6 @@
-import { profile } from '~/data/profile';
 import { siteOrigin } from '#shared/utils/site-origin';
+import { usePortfolioLocale } from './usePortfolioLocale';
+import { usePortfolioProfile } from './usePortfolioProfile';
 
 export function usePortfolioSeo(options: {
   title: () => string;
@@ -8,7 +9,8 @@ export function usePortfolioSeo(options: {
   imageWidth?: () => number;
   imageHeight?: () => number;
 }) {
-  const { locale } = useI18n();
+  const lang = usePortfolioLocale();
+  const profile = usePortfolioProfile();
   const route = useRoute();
   const config = useRuntimeConfig();
 
@@ -28,9 +30,9 @@ export function usePortfolioSeo(options: {
     ogTitle: options.title,
     ogDescription: options.description,
     ogType: 'website',
-    ogSiteName: profile.name,
+    ogSiteName: () => profile.value.name[lang.value],
     ogUrl: () => canonical.value,
-    ogLocale: () => (locale.value === 'ru' ? 'ru_RU' : 'en_US'),
+    ogLocale: () => (lang.value === 'ru' ? 'ru_RU' : 'en_US'),
     ogImage: () => image.value,
     ogImageWidth: () => options.imageWidth?.() || 1200,
     ogImageHeight: () => options.imageHeight?.() || 630,

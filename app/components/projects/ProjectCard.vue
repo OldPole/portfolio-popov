@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ArrowUpRight, ExternalLink } from '@lucide/vue';
 
-import type { Project } from '#shared/types/portfolio';
+import type { ProjectSummary } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
-defineProps<{ project: Project }>();
+defineProps<{ project: ProjectSummary }>();
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -22,6 +22,7 @@ const lang = usePortfolioLocale();
       <div class="project-browser">
         <NuxtImg
           :src="project.image"
+          :provider="project.image.startsWith('/media/') ? 'none' : undefined"
           :alt="t('common.screenshot', { name: project.name })"
           :width="project.imageWidth"
           :height="project.imageHeight"

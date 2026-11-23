@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ArrowUpRight } from '@lucide/vue';
 
-import { projects } from '#shared/data/projects';
-import { profile } from '~/data/profile';
+import type { PortfolioHome } from '#shared/types/portfolio';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
+defineProps<Pick<PortfolioHome, 'projects'>>();
+
+const profile = usePortfolioProfile();
 const { t } = useI18n();
 </script>
 

@@ -21,33 +21,13 @@
     "top": "Back to top",
     "toggleTheme": "Toggle colour theme"
   },
-  "hero": {
-    "eyebrow": "Kirill Popov",
-    "title": "Frontend Developer",
-    "description": "I build web applications with React and TypeScript. I worked on Yandex Search and Alice Chat and built the frontend for Aligned Hearts.",
-    "location": "Based in Minsk, Belarus",
-    "portrait": "Portrait of Kirill Popov"
-  },
   "experience": {
     "title": "Experience"
   },
   "skills": {
     "title": "Skills & background",
-    "core": "Languages & frameworks",
-    "state": "State & data",
-    "ui": "Interface & design systems",
-    "routing": "Routing & integration",
-    "quality": "Testing & workflow",
     "education": "Education",
-    "university": "Belarusian State University of Informatics and Radioelectronics",
-    "degree": "Bachelor's degree · Game Design",
-    "period": "2024 — 2028",
-    "grade": "Average grade: 8.33",
-    "languages": "Languages",
-    "english": "English",
-    "englishLevel": "B1+",
-    "russian": "Russian",
-    "russianLevel": "Native"
+    "languages": "Languages"
   },
   "projects": {
     "title": "Projects",
@@ -90,10 +70,6 @@
     "attachmentInvalid": "Choose a valid PDF, PNG or JPG file.",
     "attachmentTooLarge": "The attachment must be 4 MB or smaller.",
     "attachmentChoose": "Choose file"
-  },
-  "seo": {
-    "title": "Kirill Popov — Frontend Developer",
-    "description": "Frontend developer focused on React and TypeScript. Experience at Yandex, Aligned Hearts and Innowise. Explore my work, experience and CV."
   },
   "error": {
     "title": "This page took a wrong turn.",

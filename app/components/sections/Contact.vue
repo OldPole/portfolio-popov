@@ -2,10 +2,13 @@
 import { ArrowUpRight, LoaderCircle, Paperclip, Send, X } from '@lucide/vue';
 
 import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
-import { profile } from '~/data/profile';
 import { useContactForm } from '~/composables/useContactForm';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
+
+defineProps<{ preview?: boolean }>();
 
 const { t } = useI18n();
+const profile = usePortfolioProfile();
 const {
   form,
   pending,
@@ -57,6 +60,7 @@ const {
         class="contact-form"
         :aria-label="t('contact.formTitle')"
         :aria-busy="pending"
+        :inert="preview || undefined"
         @submit.prevent="submit"
       >
         <h3>

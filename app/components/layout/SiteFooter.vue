@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ArrowUpRight } from '@lucide/vue';
 
-import { profile } from '~/data/profile';
+import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
 const { t } = useI18n();
+const profile = usePortfolioProfile();
 const localePath = useLocalePath();
 const homePath = computed(() => localePath('/'));
 </script>
@@ -12,7 +13,9 @@ const homePath = computed(() => localePath('/'));
   <footer class="site-footer">
     <div class="container footer-main">
       <div>
-        <NuxtLink :to="homePath" class="wordmark">kirill popov</NuxtLink>
+        <NuxtLink :to="homePath" class="wordmark">
+          {{ profile.wordmark }}
+        </NuxtLink>
       </div>
 
       <div class="footer-links">
@@ -38,7 +41,7 @@ const homePath = computed(() => localePath('/'));
           <ArrowUpRight :size="13" aria-hidden="true" />
         </a>
         <a :href="profile.telegram" target="_blank" rel="noopener noreferrer">
-          @OldPoleh
+          {{ profile.telegramHandle }}
           <ArrowUpRight :size="13" aria-hidden="true" />
         </a>
       </div>

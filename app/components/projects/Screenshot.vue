@@ -30,6 +30,7 @@ const lang = usePortfolioLocale();
     <div class="screenshot-frame">
       <NuxtImg
         :src="image.src"
+        :provider="image.src.startsWith('/media/') ? 'none' : undefined"
         :alt="image.caption[lang]"
         :width="image.width"
         :height="image.height"
