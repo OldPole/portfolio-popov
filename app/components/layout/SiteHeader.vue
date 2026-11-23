@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUpRight, Download, Menu, Moon, Sun, X } from '@lucide/vue';
+import { Menu, Moon, Sun, X } from '@lucide/vue';
 
 import { profile } from '~/data/profile';
 
@@ -47,17 +47,6 @@ watch(
 
     <div class="header-actions">
       <UiButton
-        :href="profile.cv"
-        download
-        variant="ghost"
-        size="small"
-        class="nav-cv"
-      >
-        CV
-        <Download :size="13" aria-hidden="true" />
-      </UiButton>
-
-      <UiButton
         :to="switchLocalePath(otherLocale)"
         variant="ghost"
         size="icon"
@@ -85,15 +74,6 @@ watch(
           </span>
         </template>
       </ClientOnly>
-
-      <UiButton
-        :href="`${homePath}#contact`"
-        size="small"
-        class="header-contact"
-      >
-        {{ t('nav.contact') }}
-        <ArrowUpRight :size="15" aria-hidden="true" />
-      </UiButton>
 
       <UiButton
         variant="ghost"

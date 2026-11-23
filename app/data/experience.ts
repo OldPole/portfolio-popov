@@ -12,12 +12,14 @@ export const experience = [
     },
     points: {
       en: [
+        'Developed the “My Memory” interface in Yandex Alice, where users can view and edit saved notes, lists and reminders.',
         'Took the initiative to build a confetti effect from scratch and integrate it into the project. The effect supports configurable particle count, colours, shapes and spread patterns.',
         'Wrote automated tests to check feature behaviour and protect existing interfaces against regressions.',
         'Participated in A/B experiments and gradual rollouts using feature flags.',
         'Investigated and resolved UI regressions in the production Search and Alice interfaces.',
       ],
       ru: [
+        'Разработал интерфейс раздела «Моя память» в Яндекс Алисе, где пользователи просматривают и редактируют сохранённые заметки, списки и напоминания.',
         'По собственной инициативе написал с нуля и встроил в проект эффект конфетти. В нём можно настроить количество, цвет и форму частиц, а также схему разлёта.',
         'Писал автоматизированные тесты для проверки новых функций и защиты существующих интерфейсов от регрессий.',
         'Участвовал в A/B-экспериментах и поэтапном выпуске функций через фичефлаги.',

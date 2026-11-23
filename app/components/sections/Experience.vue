@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ArrowDownToLine, ArrowUpRight } from '@lucide/vue';
-
 import { experience } from '~/data/experience';
-import { profile } from '~/data/profile';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
 const { t } = useI18n();
@@ -62,13 +59,5 @@ const lang = usePortfolioLocale();
         </div>
       </article>
     </div>
-
-    <a :href="profile.cv" download class="cv-strip">
-      <span>
-        <ArrowDownToLine :size="18" aria-hidden="true" />
-        {{ t('common.download') }}
-      </span>
-      <ArrowUpRight :size="16" aria-hidden="true" />
-    </a>
   </section>
 </template>

@@ -20,9 +20,6 @@ const homePath = computed(() => localePath('/'));
         <a :href="`${homePath}#experience`">{{ t('nav.experience') }}</a>
         <a :href="`${homePath}#projects`">{{ t('nav.projects') }}</a>
         <a :href="`${homePath}#contact`">{{ t('nav.contact') }}</a>
-        <a :href="profile.cv" download>
-          {{ t('common.download') }}
-        </a>
       </div>
 
       <div class="footer-links">

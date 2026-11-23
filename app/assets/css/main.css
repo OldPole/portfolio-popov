@@ -264,12 +264,6 @@ img {
   color: var(--text);
 }
 
-.nav-cv {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .header-actions {
   display: flex;
   align-items: center;
@@ -521,28 +515,6 @@ img {
   color: var(--muted);
   font-size: var(--text-meta);
   padding: var(--space-1) var(--space-2);
-}
-
-.cv-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-5);
-  padding: 18px 22px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  font-size: var(--text-small);
-}
-
-.cv-strip > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.cv-strip:hover {
-  border-color: var(--muted);
 }
 
 .skills-section {
@@ -1087,10 +1059,6 @@ img {
     gap: 18px;
   }
 
-  .header-contact {
-    display: none;
-  }
-
   .hero-topline {
     margin-bottom: 45px;
   }
@@ -1224,11 +1192,6 @@ img {
     min-height: 36px;
   }
 
-  .nav-cv {
-    min-height: 36px;
-    padding-inline: 9px;
-  }
-
   .mobile-menu-toggle {
     display: inline-flex;
   }
@@ -1343,15 +1306,6 @@ img {
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: var(--space-3);
-  }
-
-  .cv-strip {
-    padding: var(--space-4);
-    align-items: flex-start;
-  }
-
-  .cv-strip > span {
-    gap: var(--space-2);
   }
 
   .background-panel {
@@ -1623,15 +1577,6 @@ img {
   .header-actions .button-icon {
     width: 32px;
     min-height: 34px;
-  }
-
-  .nav-cv {
-    padding-inline: var(--space-2);
-    min-height: 34px;
-  }
-
-  .nav-cv svg {
-    display: none;
   }
 
   .contact-email a {

@@ -23,8 +23,8 @@ const { t } = useI18n();
           <p class="hero-description">{{ t('hero.description') }}</p>
 
           <div class="hero-buttons">
-            <UiButton href="#projects">
-              {{ t('hero.work') }}
+            <UiButton href="#contact">
+              {{ t('nav.contact') }}
               <ArrowUpRight :size="17" aria-hidden="true" />
             </UiButton>
 
