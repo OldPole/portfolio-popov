@@ -60,7 +60,9 @@
     "implementation": "Технические решения",
     "gallery": "Скриншоты",
     "previousScreenshot": "Предыдущий скриншот",
-    "nextScreenshot": "Следующий скриншот"
+    "nextScreenshot": "Следующий скриншот",
+    "screenshotPreviews": "Предпросмотр скриншотов",
+    "showScreenshot": "Показать скриншот {number}: {name}"
   },
   "contact": {
     "title": "Контакты",

@@ -60,7 +60,9 @@
     "implementation": "How I built it",
     "gallery": "Screenshots",
     "previousScreenshot": "Previous screenshot",
-    "nextScreenshot": "Next screenshot"
+    "nextScreenshot": "Next screenshot",
+    "screenshotPreviews": "Screenshot previews",
+    "showScreenshot": "Show screenshot {number}: {name}"
   },
   "contact": {
     "title": "Contact",
