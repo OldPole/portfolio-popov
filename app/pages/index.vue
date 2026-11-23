@@ -53,15 +53,5 @@ useHead(() => {
 </script>
 
 <template>
-  <template v-if="home">
-    <SectionsHero />
-    <SectionsExperience :experience="home.experience" />
-    <SectionsSkills
-      :skills="home.skills"
-      :education="home.education"
-      :languages="home.languages"
-    />
-    <SectionsProjects :projects="home.projects" />
-    <SectionsContact />
-  </template>
+  <PortfolioHome v-if="home" :home="home" />
 </template>

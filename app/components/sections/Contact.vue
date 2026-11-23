@@ -5,6 +5,8 @@ import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
 import { useContactForm } from '~/composables/useContactForm';
 import { usePortfolioProfile } from '~/composables/usePortfolioProfile';
 
+defineProps<{ preview?: boolean }>();
+
 const { t } = useI18n();
 const profile = usePortfolioProfile();
 const {
@@ -58,6 +60,7 @@ const {
         class="contact-form"
         :aria-label="t('contact.formTitle')"
         :aria-busy="pending"
+        :inert="preview || undefined"
         @submit.prevent="submit"
       >
         <h3>

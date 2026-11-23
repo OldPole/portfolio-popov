@@ -22,6 +22,7 @@ const lang = usePortfolioLocale();
       <div class="project-browser">
         <NuxtImg
           :src="project.image"
+          :provider="project.image.startsWith('/media/') ? 'none' : undefined"
           :alt="t('common.screenshot', { name: project.name })"
           :width="project.imageWidth"
           :height="project.imageHeight"

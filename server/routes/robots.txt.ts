@@ -5,5 +5,5 @@ export default defineEventHandler(event => {
 
   setResponseHeader(event, 'Content-Type', 'text/plain; charset=utf-8');
 
-  return `User-agent: *\nAllow: /\nDisallow: /api/\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ''}`;
+  return `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\nDisallow: /en/admin\nDisallow: /ru/admin\n${origin ? `Sitemap: ${origin}/sitemap.xml\n` : ''}`;
 });

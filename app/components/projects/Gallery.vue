@@ -128,6 +128,7 @@ function step(direction: -1 | 1) {
         >
           <NuxtImg
             :src="image.src"
+            :provider="image.src.startsWith('/media/') ? 'none' : undefined"
             :width="image.width"
             :height="image.height"
             sizes="144px"

@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     windowsPathCompatibility,
   ],
   css: ['~/assets/css/main.css'],
+  image: { providers: { none: { provider: 'none' } } },
   vite: { plugins: [tailwindcss()] },
   colorMode: {
     preference: 'dark',
@@ -31,6 +32,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: { siteUrl: '' },
     databaseUrl: '',
+    adminOrigin: 'http://127.0.0.1:3000',
+    githubClientId: '',
+    githubClientSecret: '',
     resendApiKey: '',
     contactFrom: '',
     contactTo: 'ipetr6828@gmail.com',
@@ -53,6 +57,21 @@ export default defineNuxtConfig({
       },
     },
     '/': { redirect: '/en' },
+    '/admin': { redirect: '/ru/admin' },
+    ...Object.fromEntries(
+      ['en', 'ru'].flatMap(locale =>
+        ['', '/**'].map(path => [
+          `/${locale}/admin${path}`,
+          {
+            headers: {
+              'cache-control': 'private, no-store',
+              'x-robots-tag': 'noindex, nofollow',
+              'referrer-policy': 'no-referrer',
+            },
+          },
+        ]),
+      ),
+    ),
     ...Object.fromEntries(
       ['en', 'ru'].flatMap(locale =>
         ['experience', 'projects', 'contact'].map(section => [

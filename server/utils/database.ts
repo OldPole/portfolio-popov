@@ -33,7 +33,7 @@ function getPool(event: H3Event) {
 export async function queryPortfolio<Row extends QueryResultRow>(
   event: H3Event,
   statement: string,
-  parameters: string[] = [],
+  parameters: unknown[] = [],
 ) {
   const database = getPool(event);
 

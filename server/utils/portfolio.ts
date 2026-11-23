@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3';
+import type { AdminSection } from '#shared/types/admin';
 import type {
   PortfolioHome,
   PortfolioProfile,
@@ -13,25 +14,37 @@ const homeSections = {
   languages: 'languages',
 };
 
-const homeSectionsSql = Object.entries(homeSections)
-  .map(
-    ([section, table]) => `
+const homeSectionsSql = (includeDraft: boolean) =>
+  Object.entries(homeSections)
+    .map(([section, table]) => {
+      const isDraft = includeDraft ? `$1 = '${section}' AND key = $2` : 'false';
+      const source = includeDraft
+        ? `CASE WHEN ${isDraft} THEN COALESCE(draft, content) ELSE content END`
+        : 'content';
+      const position = includeDraft
+        ? `CASE WHEN ${isDraft} THEN COALESCE(draft_position, position) ELSE position END`
+        : 'position';
+
+      return `
       (
         SELECT COALESCE(
-          jsonb_agg(content || jsonb_build_object('key', key) ORDER BY position, key),
+          jsonb_agg((${source}) || jsonb_build_object('key', key) ORDER BY ${position}, key),
           '[]'::jsonb
         )
         FROM portfolio.${table}
-        WHERE published
+        WHERE published OR (${isDraft})
       ) AS ${section}
-    `,
-  )
-  .join(',');
+      `;
+    })
+    .join(',');
 
-export async function readPortfolioHome(event: H3Event) {
+export async function readPortfolioHome(
+  event: H3Event,
+  preview?: { section: AdminSection; key: string },
+) {
   const [home] = await queryPortfolio<PortfolioHome>(
     event,
-    `SELECT ${homeSectionsSql},
+    `SELECT ${homeSectionsSql(Boolean(preview))},
       (
         SELECT COALESCE(jsonb_agg(
           (content - ARRAY['overview', 'contribution', 'highlights', 'implementation', 'imageCaption', 'gallery'])
@@ -41,15 +54,17 @@ export async function readPortfolioHome(event: H3Event) {
         FROM portfolio.projects
         WHERE published
       ) AS projects`,
+    preview ? [preview.section, preview.key] : [],
   );
 
   return home!;
 }
 
-export async function readPortfolioProfile(event: H3Event) {
+export async function readPortfolioProfile(event: H3Event, preview = false) {
   const [row] = await queryPortfolio<{ content: PortfolioProfile }>(
     event,
-    'SELECT content FROM portfolio.profile WHERE singleton',
+    `SELECT ${preview ? 'COALESCE(draft, content)' : 'content'} AS content
+     FROM portfolio.profile WHERE singleton`,
   );
 
   if (!row) {
@@ -62,12 +77,16 @@ export async function readPortfolioProfile(event: H3Event) {
   return row.content;
 }
 
-export async function readPortfolioProject(event: H3Event, slug: string) {
+export async function readPortfolioProject(
+  event: H3Event,
+  slug: string,
+  preview = false,
+) {
   const [row] = await queryPortfolio<{ project: Project }>(
     event,
-    `SELECT content || jsonb_build_object('slug', slug) AS project
+    `SELECT ${preview ? 'COALESCE(draft, content)' : 'content'} || jsonb_build_object('slug', slug) AS project
      FROM portfolio.projects
-     WHERE slug = $1 AND published`,
+     WHERE slug = $1 ${preview ? '' : 'AND published'}`,
     [slug],
   );
 

@@ -61,7 +61,7 @@ async function seedPortfolio(client) {
   for (const [table, key, entries] of groups) {
     const records = entries.map(({ [key]: id, ...content }, position) => ({
       id,
-      position,
+      position: (position + 1) * 10,
       content,
     }));
 

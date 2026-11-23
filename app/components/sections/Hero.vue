@@ -39,9 +39,12 @@ const profile = usePortfolioProfile();
         </div>
 
         <aside class="hero-aside">
-          <figure class="hero-portrait">
+          <figure v-if="profile.portrait.src" class="hero-portrait">
             <NuxtImg
               :src="profile.portrait.src"
+              :provider="
+                profile.portrait.src.startsWith('/media/') ? 'none' : undefined
+              "
               :alt="profile.portrait.caption[lang]"
               :width="profile.portrait.width"
               :height="profile.portrait.height"
