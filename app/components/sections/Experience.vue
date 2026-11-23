@@ -16,17 +16,9 @@ const lang = usePortfolioLocale();
     aria-labelledby="experience-title"
   >
     <div class="section-heading">
-      <div>
-        <p class="eyebrow">
-          01 /
-          {{ t('experience.eyebrow') }}
-        </p>
-        <h2 id="experience-title">
-          {{ t('experience.title') }}
-        </h2>
-      </div>
-
-      <p class="section-intro">{{ t('experience.intro') }}</p>
+      <h2 id="experience-title">
+        {{ t('experience.title') }}
+      </h2>
     </div>
 
     <div class="experience-list">
@@ -44,7 +36,7 @@ const lang = usePortfolioLocale();
             <h3>
               {{ job.company }}
             </h3>
-            <span class="muted text-sm">{{ job.location[lang] }}</span>
+            <span class="company-location">{{ job.location[lang] }}</span>
           </div>
         </div>
 
@@ -74,12 +66,9 @@ const lang = usePortfolioLocale();
     <a :href="profile.cv" download class="cv-strip">
       <span>
         <ArrowDownToLine :size="18" aria-hidden="true" />
-        {{ t('experience.cv') }}
-      </span>
-      <span>
         {{ t('common.download') }}
-        <ArrowUpRight :size="16" aria-hidden="true" />
       </span>
+      <ArrowUpRight :size="16" aria-hidden="true" />
     </a>
   </section>
 </template>

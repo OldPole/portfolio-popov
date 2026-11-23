@@ -10,7 +10,6 @@ const { t } = useI18n();
   <section class="hero-panel" aria-labelledby="hero-title">
     <div class="container hero-inner">
       <div class="hero-topline">
-        <span class="small-label">{{ t('hero.index') }}</span>
         <span class="location">
           <MapPin :size="12" aria-hidden="true" />
           {{ t('hero.location') }}
@@ -21,11 +20,8 @@ const { t } = useI18n();
         <div class="hero-copy">
           <p class="hero-greeting">{{ t('hero.eyebrow') }}</p>
           <h1 id="hero-title">{{ t('hero.title') }}</h1>
-          <p class="hero-subtitle">{{ t('hero.subtitle') }}</p>
           <p class="hero-description">{{ t('hero.description') }}</p>
-          <p class="hero-description secondary-description">
-            {{ t('hero.description2') }}
-          </p>
+
           <div class="hero-buttons">
             <UiButton href="#projects">
               {{ t('hero.work') }}
@@ -54,11 +50,6 @@ const { t } = useI18n();
               preload
             />
           </figure>
-
-          <div class="identity-row">
-            <span>{{ t('hero.focus') }}</span>
-            <strong>{{ t('hero.focusValue') }}</strong>
-          </div>
 
           <div class="hero-socials">
             <a :href="profile.github" target="_blank" rel="noopener noreferrer">

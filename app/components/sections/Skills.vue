@@ -14,15 +14,7 @@ const { t } = useI18n();
   >
     <div class="container">
       <div class="section-heading">
-        <div>
-          <p class="eyebrow">
-            02 /
-            {{ t('skills.eyebrow') }}
-          </p>
-          <h2 id="skills-title">{{ t('skills.title') }}</h2>
-        </div>
-
-        <p class="section-intro">{{ t('skills.intro') }}</p>
+        <h2 id="skills-title">{{ t('skills.title') }}</h2>
       </div>
 
       <div class="skills-grid">

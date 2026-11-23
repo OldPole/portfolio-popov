@@ -23,28 +23,18 @@
     "top": "Back to top"
   },
   "hero": {
-    "eyebrow": "Hi, I'm Kirill",
+    "eyebrow": "Kirill Popov",
     "title": "Frontend Developer",
-    "subtitle": "Thoughtful interfaces.\nSolid engineering.",
-    "description": "I build web applications with React and TypeScript — from the first component to production. My experience spans startup products and frontend work at Yandex.",
-    "description2": "I enjoy turning complex product requirements into clear, maintainable interfaces, connecting APIs and making real-time interactions feel natural.",
+    "description": "I build web applications with React and TypeScript. I worked on Yandex Search and Alice Chat and built the frontend for Aligned Hearts.",
     "work": "Explore my work",
     "location": "Based in Minsk, Belarus",
-    "focus": "My focus",
-    "focusValue": "React & TypeScript",
-    "index": "Personal portfolio / 2026",
     "portrait": "Portrait of Kirill Popov"
   },
   "experience": {
-    "eyebrow": "My journey",
-    "title": "Experience",
-    "intro": "Product work, real teams, and lessons from shipping.",
-    "cv": "The full story is in my CV"
+    "title": "Experience"
   },
   "skills": {
-    "eyebrow": "My toolkit",
     "title": "Skills & background",
-    "intro": "The technologies I work with, and the foundations behind them.",
     "core": "Languages & frameworks",
     "state": "State & data",
     "ui": "Interface & design systems",
@@ -62,9 +52,7 @@
     "russianLevel": "Native"
   },
   "projects": {
-    "eyebrow": "Selected work",
     "title": "Projects",
-    "intro": "A selection of products I've helped build and ideas I've brought to life.",
     "all": "More on GitHub",
     "contribution": "My contribution",
     "highlights": "What it includes",
@@ -72,15 +60,12 @@
     "next": "Next project",
     "overview": "About the project",
     "implementation": "How I built it",
-    "gallery": "A closer look",
-    "galleryIntro": "Explore the screens and open any screenshot at its original resolution.",
+    "gallery": "Screenshots",
     "openOriginal": "Open original",
     "readme": "Read the project README"
   },
   "contact": {
-    "eyebrow": "Let's talk",
-    "title": "Have something\nin mind?",
-    "intro": "A product idea, a frontend role, or a project worth building together — I'd like to hear about it.",
+    "title": "Contact",
     "emailLabel": "Drop me a line",
     "formTitle": "Send me a message",
     "name": "Your name",
@@ -99,9 +84,6 @@
     "alternative": "Prefer a chat? Find me on Telegram",
     "privacy": "Your name, email and message are used only to reply to your enquiry.",
     "website": "Leave this field empty"
-  },
-  "footer": {
-    "description": "Frontend developer. React & TypeScript.\nBased in Minsk, building for the web."
   },
   "seo": {
     "title": "Kirill Popov — Frontend Developer",

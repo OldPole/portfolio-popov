@@ -13,7 +13,6 @@ const homePath = computed(() => localePath('/'));
     <div class="container footer-main">
       <div>
         <NuxtLink :to="homePath" class="wordmark">kirill popov</NuxtLink>
-        <p class="footer-description">{{ t('footer.description') }}</p>
       </div>
 
       <div class="footer-links">

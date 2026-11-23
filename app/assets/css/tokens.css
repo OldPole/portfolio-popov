@@ -10,8 +10,32 @@
   --accent: #c5ef86;
   --accent-ink: #18230d;
   --header: rgb(17 17 19 / 93%);
-  --font-sans: 'Portfolio Sans', 'Segoe UI', sans-serif;
-  --font-display: 'Portfolio Sans', 'Segoe UI', sans-serif;
+  --color-error: #f2b9a9;
+  --color-shadow: rgb(0 0 0 / 15%);
+  --color-preview-control: rgb(255 255 255 / 65%);
+  --color-preview-ink: #30352c;
+
+  --font-portfolio: 'Portfolio Sans', 'Segoe UI', sans-serif;
+  --text-meta: 0.8125rem;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: 1.125rem;
+  --leading-heading: 1.2;
+  --leading-control: 1.5;
+  --leading-copy: 1.7;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --radius-control: 5px;
+  --radius-card: 8px;
+  --radius-panel: 16px;
 }
 
 :root.light {
@@ -26,4 +50,5 @@
   --accent: #35550d;
   --accent-ink: #f3f9e9;
   --header: rgb(248 247 243 / 94%);
+  --color-error: #96321b;
 }

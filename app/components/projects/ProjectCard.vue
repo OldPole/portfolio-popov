@@ -4,7 +4,7 @@ import { ArrowUpRight, ExternalLink } from '@lucide/vue';
 import type { Project } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
-defineProps<{ project: Project; index: number }>();
+defineProps<{ project: Project }>();
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -20,10 +20,6 @@ const lang = usePortfolioLocale();
       :aria-label="`${project.name} — ${t('common.details')}`"
     >
       <div class="project-browser">
-        <div class="browser-chrome" aria-hidden="true">
-          <span>{{ project.name }}</span>
-        </div>
-
         <NuxtImg
           :src="project.image"
           :alt="t('common.screenshot', { name: project.name })"
@@ -43,7 +39,7 @@ const lang = usePortfolioLocale();
     </NuxtLink>
     <div class="project-meta">
       <span>
-        {{ String(index + 1).padStart(2, '0') }} / {{ project.category[lang] }}
+        {{ project.category[lang] }}
       </span>
       <span>{{ project.year }}</span>
     </div>

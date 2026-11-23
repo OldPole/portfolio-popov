@@ -14,25 +14,16 @@ const { t } = useI18n();
     aria-labelledby="projects-title"
   >
     <div class="section-heading">
-      <div>
-        <p class="eyebrow">
-          03 /
-          {{ t('projects.eyebrow') }}
-        </p>
-        <h2 id="projects-title">
-          {{ t('projects.title') }}
-        </h2>
-      </div>
-
-      <p class="section-intro">{{ t('projects.intro') }}</p>
+      <h2 id="projects-title">
+        {{ t('projects.title') }}
+      </h2>
     </div>
 
     <div class="projects-grid">
       <ProjectsProjectCard
-        v-for="(project, index) in projects"
+        v-for="project in projects"
         :key="project.slug"
         :project="project"
-        :index="index"
       />
     </div>
 

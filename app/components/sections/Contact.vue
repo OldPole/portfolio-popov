@@ -12,14 +12,9 @@ const { form, pending, status, feedback, submit } = useContactForm();
   <section id="contact" class="contact-section" aria-labelledby="contact-title">
     <div class="container contact-grid">
       <div class="contact-copy">
-        <p class="eyebrow">
-          04 /
-          {{ t('contact.eyebrow') }}
-        </p>
         <h2 id="contact-title">
           {{ t('contact.title') }}
         </h2>
-        <p class="contact-intro">{{ t('contact.intro') }}</p>
         <div class="contact-email">
           <span class="small-label">{{ t('contact.emailLabel') }}</span>
           <a :href="`mailto:${profile.email}`">

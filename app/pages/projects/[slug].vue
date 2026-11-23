@@ -140,7 +140,6 @@ usePortfolioSeo({
 
     <section class="project-gallery" aria-labelledby="gallery-title">
       <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
-      <p class="project-gallery-intro">{{ t('projects.galleryIntro') }}</p>
       <div class="project-gallery-grid">
         <ProjectsScreenshot
           v-for="image in project.gallery"
