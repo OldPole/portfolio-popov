@@ -14,6 +14,10 @@
   --color-shadow: rgb(0 0 0 / 15%);
   --color-preview-control: rgb(255 255 255 / 65%);
   --color-preview-ink: #30352c;
+  --color-gallery-control: #202126;
+  --color-gallery-control-hover: #383940;
+  --color-gallery-control-ink: #f8f7f3;
+  --color-gallery-control-line: rgb(255 255 255 / 40%);
 
   --font-portfolio: 'Portfolio Sans', 'Segoe UI', sans-serif;
   --text-meta: 0.8125rem;

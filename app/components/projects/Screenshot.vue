@@ -3,10 +3,16 @@ import type { ProjectImage } from '#shared/types/portfolio';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
 withDefaults(
-  defineProps<{ image: ProjectImage; accent?: string; priority?: boolean }>(),
+  defineProps<{
+    image: ProjectImage;
+    accent?: string;
+    priority?: boolean;
+    showCaption?: boolean;
+  }>(),
   {
     accent: undefined,
     priority: false,
+    showCaption: true,
   },
 );
 
@@ -36,7 +42,7 @@ const lang = usePortfolioLocale();
         :preload="priority"
       />
     </div>
-    <figcaption class="screenshot-caption">
+    <figcaption v-if="showCaption" class="screenshot-caption">
       {{ image.caption[lang] }}
     </figcaption>
   </figure>

@@ -2,10 +2,12 @@
 import { ChevronLeft, ChevronRight } from '@lucide/vue';
 
 import type { ProjectImage } from '#shared/types/portfolio';
+import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
 
 const props = defineProps<{ images: ProjectImage[] }>();
 
 const { t } = useI18n();
+const lang = usePortfolioLocale();
 const trackId = useId();
 const track = useTemplateRef<HTMLDivElement>('track');
 const activeIndex = ref(0);
@@ -24,13 +26,19 @@ function syncActiveIndex() {
 
 function step(direction: -1 | 1) {
   const viewport = track.value;
-  const index = activeIndex.value + direction;
+  const total = props.images.length;
 
-  if (!viewport || index < 0 || index >= props.images.length) {
+  if (!viewport || total < 2) {
     return;
   }
 
-  viewport.scrollTo({ left: index * viewport.clientWidth });
+  const next = activeIndex.value + direction;
+  const index = (next + total) % total;
+
+  viewport.scrollTo({
+    left: index * viewport.clientWidth,
+    behavior: next === index ? 'auto' : 'instant',
+  });
 }
 </script>
 
@@ -38,23 +46,7 @@ function step(direction: -1 | 1) {
   <section class="project-gallery" aria-labelledby="gallery-title">
     <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
 
-    <div
-      class="project-gallery-stage"
-      :class="{ 'has-controls': images.length > 1 }"
-    >
-      <UiButton
-        v-if="images.length > 1"
-        class="project-gallery-arrow"
-        variant="primary"
-        size="icon"
-        :aria-label="t('projects.previousScreenshot')"
-        :aria-controls="trackId"
-        :disabled="activeIndex === 0"
-        @click="step(-1)"
-      >
-        <ChevronLeft :size="20" aria-hidden="true" />
-      </UiButton>
-
+    <div class="project-gallery-stage">
       <div
         :id="trackId"
         ref="track"
@@ -71,30 +63,40 @@ function step(direction: -1 | 1) {
           :key="image.src"
           class="project-gallery-slide"
         >
-          <ProjectsScreenshot :image="image" />
+          <ProjectsScreenshot :image="image" :show-caption="false" />
         </div>
       </div>
 
       <UiButton
         v-if="images.length > 1"
-        class="project-gallery-arrow"
-        variant="primary"
+        class="project-gallery-arrow project-gallery-arrow-previous"
+        variant="outline"
+        size="icon"
+        :aria-label="t('projects.previousScreenshot')"
+        :aria-controls="trackId"
+        @click="step(-1)"
+      >
+        <ChevronLeft :size="20" aria-hidden="true" />
+      </UiButton>
+
+      <UiButton
+        v-if="images.length > 1"
+        class="project-gallery-arrow project-gallery-arrow-next"
+        variant="outline"
         size="icon"
         :aria-label="t('projects.nextScreenshot')"
         :aria-controls="trackId"
-        :disabled="activeIndex === images.length - 1"
         @click="step(1)"
       >
         <ChevronRight :size="20" aria-hidden="true" />
       </UiButton>
     </div>
 
-    <p
-      v-if="images.length > 1"
-      class="project-gallery-position"
-      aria-live="polite"
-    >
-      {{ activeIndex + 1 }} / {{ images.length }}
-    </p>
+    <div class="project-gallery-caption" aria-live="polite">
+      <p>{{ images[activeIndex]?.caption[lang] }}</p>
+      <span v-if="images.length > 1" class="project-gallery-position">
+        {{ activeIndex + 1 }} / {{ images.length }}
+      </span>
+    </div>
   </section>
 </template>

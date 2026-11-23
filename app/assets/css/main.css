@@ -1541,14 +1541,18 @@ img {
 }
 
 .project-gallery {
+  --gallery-ratio: 1.78;
+  --gallery-ui-height: 13rem;
   --gallery-arrow-size: 44px;
-  --gallery-stage-gap: var(--space-2);
-  --gallery-ui-height: 15rem;
-  --gallery-frame-height: min(
-    40rem,
-    max(5rem, calc(100svh - var(--gallery-ui-height)))
+  --gallery-arrow-inset: var(--space-4);
+  --gallery-frame-height: max(5rem, calc(100svh - var(--gallery-ui-height)));
+
+  width: min(
+    100%,
+    70rem,
+    calc(var(--gallery-frame-height) * var(--gallery-ratio))
   );
-  --gallery-frame-width: calc(var(--gallery-frame-height) * 1.6);
+  margin-inline: auto;
 }
 
 .project-gallery h2 {
@@ -1556,45 +1560,47 @@ img {
 }
 
 .project-gallery-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  gap: var(--gallery-stage-gap);
-  max-inline-size: var(--gallery-frame-width);
-  margin-inline: auto;
-}
-
-.project-gallery-stage.has-controls {
-  grid-template-columns: var(--gallery-arrow-size) minmax(0, 1fr) var(
-      --gallery-arrow-size
-    );
-  max-inline-size: calc(
-    var(--gallery-frame-width) + 2 *
-      (var(--gallery-arrow-size) + var(--gallery-stage-gap))
-  );
+  position: relative;
 }
 
 .project-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
   width: var(--gallery-arrow-size);
   min-height: var(--gallery-arrow-size);
+  border-color: var(--color-gallery-control-line);
+  border-radius: 50%;
+  color: var(--color-gallery-control-ink);
+  background: var(--color-gallery-control);
+  box-shadow: 0 2px 10px var(--color-shadow);
 }
 
-.project-gallery-position {
-  margin-top: var(--space-2);
-  text-align: center;
-  font-size: var(--text-small);
-  font-variant-numeric: tabular-nums;
-  color: var(--muted);
+.project-gallery-arrow:hover:not(:disabled),
+.project-gallery-arrow:active:not(:disabled) {
+  transform: none;
+  opacity: 1;
+  border-color: var(--color-gallery-control-ink);
+  background: var(--color-gallery-control-hover);
+}
+
+.project-gallery-arrow-previous {
+  inset-inline-start: var(--gallery-arrow-inset);
+}
+
+.project-gallery-arrow-next {
+  inset-inline-end: var(--gallery-arrow-inset);
 }
 
 .project-gallery-track {
   display: flex;
   overflow-x: auto;
-  min-width: 0;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  border: 1px solid var(--line);
   border-radius: var(--radius-card);
+  background: var(--surface);
 }
 
 .project-gallery-track::-webkit-scrollbar {
@@ -1620,9 +1626,11 @@ img {
 .project-gallery-slide .screenshot-frame {
   display: grid;
   grid-template-rows: minmax(0, 1fr);
-  aspect-ratio: 16 / 10;
-  max-block-size: var(--gallery-frame-height);
-  margin-inline: auto;
+  aspect-ratio: var(--gallery-ratio);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
 }
 
 .project-gallery-slide img {
@@ -1631,40 +1639,51 @@ img {
   min-height: 0;
   margin-inline: auto;
   object-fit: contain;
+  border-radius: 0;
 }
 
-.project-gallery-slide .screenshot-caption {
-  text-align: center;
+.project-gallery-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  color: var(--muted);
+  font-size: var(--text-small);
+  line-height: var(--leading-control);
+}
+
+.project-gallery-caption p {
+  min-width: 0;
   overflow-wrap: anywhere;
+}
+
+.project-gallery-position {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 600px) {
   .project-gallery {
-    --gallery-arrow-size: 36px;
-    --gallery-stage-gap: var(--space-1);
+    --gallery-arrow-size: 40px;
+    --gallery-arrow-inset: var(--space-2);
   }
 }
 
 @media (max-height: 460px) {
   .project-gallery {
-    --gallery-ui-height: 13rem;
+    --gallery-ui-height: 11rem;
+    --gallery-arrow-size: 36px;
+    --gallery-arrow-inset: var(--space-2);
   }
 
   .project-gallery h2 {
     font-size: 1.5rem;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
-  .project-gallery-slide .screenshot-caption {
-    padding-block: var(--space-1);
-  }
-
-  .project-gallery-slide .screenshot-frame {
-    padding: var(--space-2);
-  }
-
-  .project-gallery-position {
-    margin-top: var(--space-1);
+  .project-gallery-caption {
+    margin-top: var(--space-2);
   }
 }
 
