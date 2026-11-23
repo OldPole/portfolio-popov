@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUpRight, LoaderCircle, Send } from '@lucide/vue';
+import { ArrowUpRight, LoaderCircle, Paperclip, Send, X } from '@lucide/vue';
 
 import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
 import { profile } from '~/data/profile';
@@ -12,6 +12,7 @@ const {
   status,
   feedback,
   attachment,
+  chooseAttachment,
   selectAttachment,
   clearAttachment,
   submit,
@@ -116,29 +117,44 @@ const {
         </div>
 
         <div class="form-field">
-          <label for="contact-attachment">{{ t('contact.attachment') }}</label>
+          <p class="attachment-label">{{ t('contact.attachment') }}</p>
           <input
-            id="contact-attachment"
             ref="attachmentInput"
             name="attachment"
             type="file"
-            aria-describedby="contact-attachment-help"
             :accept="contactAttachmentAccept"
             :disabled="pending"
+            hidden
             @change="selectAttachment"
           />
+          <div class="attachment-actions" aria-live="polite">
+            <UiButton
+              variant="outline"
+              size="small"
+              aria-describedby="contact-attachment-help"
+              :disabled="pending"
+              @click="chooseAttachment"
+            >
+              <Paperclip :size="15" aria-hidden="true" />
+              {{ t('contact.attachmentChoose') }}
+            </UiButton>
+            <UiButton
+              v-if="attachment"
+              variant="outline"
+              size="small"
+              :disabled="pending"
+              @click="clearAttachment"
+            >
+              <X :size="15" aria-hidden="true" />
+              {{ t('contact.attachmentRemove') }}
+            </UiButton>
+          </div>
+          <p v-if="attachment" class="attachment-name" aria-live="polite">
+            {{ attachment.name }}
+          </p>
           <p id="contact-attachment-help" class="attachment-help">
             {{ t('contact.attachmentHelp') }}
           </p>
-          <UiButton
-            v-if="attachment"
-            variant="text"
-            size="small"
-            :disabled="pending"
-            @click="clearAttachment"
-          >
-            {{ t('contact.attachmentRemove') }}
-          </UiButton>
         </div>
 
         <div class="honeypot" aria-hidden="true">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLeft, ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
+import { ArrowUpRight, Check, ExternalLink } from '@lucide/vue';
 
 import { projects } from '#shared/data/projects';
 import { usePortfolioLocale } from '~/composables/usePortfolioLocale';
@@ -8,7 +8,6 @@ import { usePortfolioSeo } from '~/composables/usePortfolioSeo';
 const route = useRoute();
 const { t } = useI18n();
 const lang = usePortfolioLocale();
-const localePath = useLocalePath();
 
 const project = computed(() =>
   projects.find(item => item.slug === route.params.slug),
@@ -29,16 +28,6 @@ usePortfolioSeo({
 
 <template>
   <div v-if="project" class="project-page container">
-    <UiButton
-      :href="`${localePath('/')}#projects`"
-      variant="text"
-      size="small"
-      class="project-back"
-    >
-      <ArrowLeft :size="16" aria-hidden="true" />
-      {{ t('common.back') }}
-    </UiButton>
-
     <div class="project-page-heading">
       <p class="eyebrow">
         {{ project.category[lang] }}

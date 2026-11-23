@@ -11,12 +11,23 @@ const homePath = computed(() => localePath('/'));
 const colorMode = useColorMode();
 
 const menuOpen = ref(false);
+const mounted = ref(false);
 
 const otherLocale = computed(() => (locale.value === 'en' ? 'ru' : 'en'));
+const languagePath = computed(() => {
+  const path = switchLocalePath(otherLocale.value);
+
+  return mounted.value ? path : path.replace(/#.*$/, '');
+});
 const links = computed(() => [
   { label: t('nav.experience'), href: `${homePath.value}#experience` },
+  { label: t('nav.skills'), href: `${homePath.value}#skills` },
   { label: t('nav.projects'), href: `${homePath.value}#projects` },
 ]);
+
+onMounted(() => {
+  mounted.value = true;
+});
 
 watch(
   () => route.fullPath,
@@ -47,7 +58,7 @@ watch(
 
       <div class="header-actions">
         <UiButton
-          :to="switchLocalePath(otherLocale)"
+          :to="languagePath"
           variant="ghost"
           size="icon"
           class="language-toggle"

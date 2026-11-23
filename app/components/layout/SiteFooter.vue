@@ -18,6 +18,7 @@ const homePath = computed(() => localePath('/'));
       <div class="footer-links">
         <span class="small-label">{{ t('common.navigation') }}</span>
         <a :href="`${homePath}#experience`">{{ t('nav.experience') }}</a>
+        <a :href="`${homePath}#skills`">{{ t('nav.skills') }}</a>
         <a :href="`${homePath}#projects`">{{ t('nav.projects') }}</a>
         <a :href="`${homePath}#contact`">{{ t('nav.contact') }}</a>
       </div>

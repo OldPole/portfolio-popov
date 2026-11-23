@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "experience": "Experience",
+    "skills": "Skills",
     "projects": "Projects",
     "contact": "Get in touch",
     "menu": "Toggle navigation",
@@ -12,7 +13,6 @@
     "viewCode": "Source code",
     "liveDemo": "Live demo",
     "details": "Explore project",
-    "back": "All projects",
     "language": "Switch to Russian",
     "screenshot": "Screenshot of {name}",
     "navigation": "Navigation",
@@ -86,7 +86,8 @@
     "attachmentHelp": "One PDF, PNG or JPG, up to 4 MB.",
     "attachmentRemove": "Remove file",
     "attachmentInvalid": "Choose a valid PDF, PNG or JPG file.",
-    "attachmentTooLarge": "The attachment must be 4 MB or smaller."
+    "attachmentTooLarge": "The attachment must be 4 MB or smaller.",
+    "attachmentChoose": "Choose file"
   },
   "seo": {
     "title": "Kirill Popov — Frontend Developer",

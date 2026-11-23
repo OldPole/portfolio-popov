@@ -38,7 +38,23 @@ function step(direction: -1 | 1) {
   <section class="project-gallery" aria-labelledby="gallery-title">
     <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
 
-    <div class="project-gallery-stage">
+    <div
+      class="project-gallery-stage"
+      :class="{ 'has-controls': images.length > 1 }"
+    >
+      <UiButton
+        v-if="images.length > 1"
+        class="project-gallery-arrow"
+        variant="primary"
+        size="icon"
+        :aria-label="t('projects.previousScreenshot')"
+        :aria-controls="trackId"
+        :disabled="activeIndex === 0"
+        @click="step(-1)"
+      >
+        <ChevronLeft :size="20" aria-hidden="true" />
+      </UiButton>
+
       <div
         :id="trackId"
         ref="track"
@@ -59,29 +75,18 @@ function step(direction: -1 | 1) {
         </div>
       </div>
 
-      <div v-if="images.length > 1" class="project-gallery-controls">
-        <UiButton
-          variant="outline"
-          size="icon"
-          :aria-label="t('projects.previousScreenshot')"
-          :aria-controls="trackId"
-          :disabled="activeIndex === 0"
-          @click="step(-1)"
-        >
-          <ChevronLeft :size="20" aria-hidden="true" />
-        </UiButton>
-
-        <UiButton
-          variant="outline"
-          size="icon"
-          :aria-label="t('projects.nextScreenshot')"
-          :aria-controls="trackId"
-          :disabled="activeIndex === images.length - 1"
-          @click="step(1)"
-        >
-          <ChevronRight :size="20" aria-hidden="true" />
-        </UiButton>
-      </div>
+      <UiButton
+        v-if="images.length > 1"
+        class="project-gallery-arrow"
+        variant="primary"
+        size="icon"
+        :aria-label="t('projects.nextScreenshot')"
+        :aria-controls="trackId"
+        :disabled="activeIndex === images.length - 1"
+        @click="step(1)"
+      >
+        <ChevronRight :size="20" aria-hidden="true" />
+      </UiButton>
     </div>
 
     <p

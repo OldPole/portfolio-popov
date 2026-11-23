@@ -17,6 +17,10 @@ export function useContactForm() {
     feedbackKey.value ? t(feedbackKey.value) : '',
   );
 
+  function chooseAttachment() {
+    attachmentInput.value?.click();
+  }
+
   function selectAttachment() {
     attachment.value = attachmentInput.value?.files?.[0];
 
@@ -104,6 +108,7 @@ export function useContactForm() {
     status,
     feedback,
     attachment,
+    chooseAttachment,
     selectAttachment,
     clearAttachment,
     submit,

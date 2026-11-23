@@ -2,6 +2,7 @@
   "nav": {
     "home": "Главная",
     "experience": "Опыт",
+    "skills": "Навыки",
     "projects": "Проекты",
     "contact": "Связаться",
     "menu": "Открыть навигацию",
@@ -12,7 +13,6 @@
     "viewCode": "Исходный код",
     "liveDemo": "Открыть демо",
     "details": "Подробнее о проекте",
-    "back": "Все проекты",
     "language": "Switch to English",
     "screenshot": "Скриншот проекта {name}",
     "navigation": "Навигация",
@@ -86,7 +86,8 @@
     "attachmentHelp": "Один файл PDF, PNG или JPG до 4 МБ.",
     "attachmentRemove": "Убрать файл",
     "attachmentInvalid": "Выберите файл PDF, PNG или JPG.",
-    "attachmentTooLarge": "Размер вложения не должен превышать 4 МБ."
+    "attachmentTooLarge": "Размер вложения не должен превышать 4 МБ.",
+    "attachmentChoose": "Выбрать файл"
   },
   "seo": {
     "title": "Кирилл Попов — Frontend Developer",

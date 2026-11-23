@@ -830,23 +830,20 @@ img {
   border-color: var(--muted);
 }
 
-.form-field input[type='file'] {
-  font-size: var(--text-small);
-}
-
-.form-field input::file-selector-button {
-  cursor: pointer;
-  margin-inline-end: var(--space-2);
-  padding: var(--space-1) var(--space-2);
-  background: var(--surface-raised);
+.attachment-label {
+  margin-bottom: var(--space-2);
   color: var(--text);
-  border-radius: var(--radius-control);
+  font-size: var(--text-small);
+  font-weight: 600;
 }
 
-.form-field input:disabled::file-selector-button {
-  cursor: not-allowed;
+.attachment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
+.attachment-name,
 .attachment-help {
   margin-top: var(--space-2);
   font-size: var(--text-meta);
@@ -865,6 +862,10 @@ img {
 .form-field input::placeholder,
 .form-field textarea::placeholder {
   color: var(--subtle);
+}
+
+.attachment-name {
+  overflow-wrap: anywhere;
 }
 
 .form-submit {
@@ -947,11 +948,6 @@ img {
 .project-page {
   padding-top: 55px;
   padding-bottom: 90px;
-}
-
-.project-back {
-  color: var(--muted);
-  margin-bottom: 50px;
 }
 
 .project-page-heading {
@@ -1443,10 +1439,6 @@ img {
     padding-bottom: 50px;
   }
 
-  .project-back {
-    margin-bottom: 35px;
-  }
-
   .project-page h1 {
     font-size: 42px;
   }
@@ -1548,23 +1540,43 @@ img {
   color: var(--muted);
 }
 
+.project-gallery {
+  --gallery-arrow-size: 44px;
+  --gallery-stage-gap: var(--space-2);
+  --gallery-ui-height: 15rem;
+  --gallery-frame-height: min(
+    40rem,
+    max(5rem, calc(100svh - var(--gallery-ui-height)))
+  );
+  --gallery-frame-width: calc(var(--gallery-frame-height) * 1.6);
+}
+
+.project-gallery h2 {
+  margin-bottom: var(--space-4);
+}
+
 .project-gallery-stage {
-  position: relative;
-}
-
-.project-gallery-controls {
-  position: absolute;
-  inset: 0 var(--space-3);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
+  gap: var(--gallery-stage-gap);
+  max-inline-size: var(--gallery-frame-width);
+  margin-inline: auto;
 }
 
-.project-gallery-controls .button {
-  pointer-events: auto;
-  background: var(--surface-raised);
-  box-shadow: 0 2px 8px var(--color-shadow);
+.project-gallery-stage.has-controls {
+  grid-template-columns: var(--gallery-arrow-size) minmax(0, 1fr) var(
+      --gallery-arrow-size
+    );
+  max-inline-size: calc(
+    var(--gallery-frame-width) + 2 *
+      (var(--gallery-arrow-size) + var(--gallery-stage-gap))
+  );
+}
+
+.project-gallery-arrow {
+  width: var(--gallery-arrow-size);
+  min-height: var(--gallery-arrow-size);
 }
 
 .project-gallery-position {
@@ -1578,6 +1590,7 @@ img {
 .project-gallery-track {
   display: flex;
   overflow-x: auto;
+  min-width: 0;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -1605,14 +1618,54 @@ img {
 }
 
 .project-gallery-slide .screenshot-frame {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
   aspect-ratio: 16 / 10;
+  max-block-size: var(--gallery-frame-height);
+  margin-inline: auto;
 }
 
 .project-gallery-slide img {
   max-width: var(--screenshot-width);
   height: 100%;
+  min-height: 0;
   margin-inline: auto;
   object-fit: contain;
+}
+
+.project-gallery-slide .screenshot-caption {
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .project-gallery {
+    --gallery-arrow-size: 36px;
+    --gallery-stage-gap: var(--space-1);
+  }
+}
+
+@media (max-height: 460px) {
+  .project-gallery {
+    --gallery-ui-height: 13rem;
+  }
+
+  .project-gallery h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .project-gallery-slide .screenshot-caption {
+    padding-block: var(--space-1);
+  }
+
+  .project-gallery-slide .screenshot-frame {
+    padding: var(--space-2);
+  }
+
+  .project-gallery-position {
+    margin-top: var(--space-1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
