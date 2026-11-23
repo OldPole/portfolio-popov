@@ -18,6 +18,7 @@ function syncActiveIndex() {
   }
 
   const index = Math.round(viewport.scrollLeft / viewport.clientWidth);
+
   activeIndex.value = Math.max(0, Math.min(props.images.length - 1, index));
 }
 
@@ -35,8 +36,28 @@ function step(direction: -1 | 1) {
 
 <template>
   <section class="project-gallery" aria-labelledby="gallery-title">
-    <div class="project-gallery-header">
-      <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
+    <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
+
+    <div class="project-gallery-stage">
+      <div
+        :id="trackId"
+        ref="track"
+        class="project-gallery-track"
+        role="group"
+        aria-labelledby="gallery-title"
+        tabindex="0"
+        @scroll.passive="syncActiveIndex"
+        @keydown.left.prevent="step(-1)"
+        @keydown.right.prevent="step(1)"
+      >
+        <div
+          v-for="image in images"
+          :key="image.src"
+          class="project-gallery-slide"
+        >
+          <ProjectsScreenshot :image="image" />
+        </div>
+      </div>
 
       <div v-if="images.length > 1" class="project-gallery-controls">
         <UiButton
@@ -49,10 +70,6 @@ function step(direction: -1 | 1) {
         >
           <ChevronLeft :size="20" aria-hidden="true" />
         </UiButton>
-
-        <span class="project-gallery-position" aria-live="polite">
-          {{ activeIndex + 1 }} / {{ images.length }}
-        </span>
 
         <UiButton
           variant="outline"
@@ -67,22 +84,12 @@ function step(direction: -1 | 1) {
       </div>
     </div>
 
-    <div
-      :id="trackId"
-      ref="track"
-      class="project-gallery-track"
-      tabindex="0"
-      @scroll.passive="syncActiveIndex"
-      @keydown.left.prevent="step(-1)"
-      @keydown.right.prevent="step(1)"
+    <p
+      v-if="images.length > 1"
+      class="project-gallery-position"
+      aria-live="polite"
     >
-      <div
-        v-for="image in images"
-        :key="image.src"
-        class="project-gallery-slide"
-      >
-        <ProjectsScreenshot :image="image" />
-      </div>
-    </div>
+      {{ activeIndex + 1 }} / {{ images.length }}
+    </p>
   </section>
 </template>

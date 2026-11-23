@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { ArrowUpRight, LoaderCircle, Send } from '@lucide/vue';
 
+import { contactAttachmentAccept } from '#shared/utils/contact-attachment';
 import { profile } from '~/data/profile';
 import { useContactForm } from '~/composables/useContactForm';
 
 const { t } = useI18n();
-const { form, pending, status, feedback, submit } = useContactForm();
+const {
+  form,
+  pending,
+  status,
+  feedback,
+  attachment,
+  selectAttachment,
+  clearAttachment,
+  submit,
+} = useContactForm();
 </script>
 
 <template>
@@ -103,6 +113,32 @@ const { form, pending, status, feedback, submit } = useContactForm();
             required
             :disabled="pending"
           />
+        </div>
+
+        <div class="form-field">
+          <label for="contact-attachment">{{ t('contact.attachment') }}</label>
+          <input
+            id="contact-attachment"
+            ref="attachmentInput"
+            name="attachment"
+            type="file"
+            aria-describedby="contact-attachment-help"
+            :accept="contactAttachmentAccept"
+            :disabled="pending"
+            @change="selectAttachment"
+          />
+          <p id="contact-attachment-help" class="attachment-help">
+            {{ t('contact.attachmentHelp') }}
+          </p>
+          <UiButton
+            v-if="attachment"
+            variant="text"
+            size="small"
+            :disabled="pending"
+            @click="clearAttachment"
+          >
+            {{ t('contact.attachmentRemove') }}
+          </UiButton>
         </div>
 
         <div class="honeypot" aria-hidden="true">

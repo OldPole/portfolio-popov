@@ -13,7 +13,6 @@ const colorMode = useColorMode();
 const menuOpen = ref(false);
 
 const otherLocale = computed(() => (locale.value === 'en' ? 'ru' : 'en'));
-const isDark = computed(() => colorMode.value === 'dark');
 const links = computed(() => [
   { label: t('nav.experience'), href: `${homePath.value}#experience` },
   { label: t('nav.projects'), href: `${homePath.value}#projects` },
@@ -57,24 +56,19 @@ watch(
           {{ otherLocale.toUpperCase() }}
         </UiButton>
 
-        <ClientOnly>
-          <UiButton
-            variant="ghost"
-            size="icon"
-            class="theme-toggle"
-            :aria-label="t(isDark ? 'common.light' : 'common.dark')"
-            @click="colorMode.preference = isDark ? 'light' : 'dark'"
-          >
-            <Sun v-if="isDark" :size="17" aria-hidden="true" />
-            <Moon v-else :size="17" aria-hidden="true" />
-          </UiButton>
-
-          <template #fallback>
-            <span class="button button-ghost button-icon" aria-hidden="true">
-              <Moon :size="17" />
-            </span>
-          </template>
-        </ClientOnly>
+        <UiButton
+          variant="ghost"
+          size="icon"
+          class="theme-toggle"
+          :aria-label="t('common.toggleTheme')"
+          @click="
+            colorMode.preference =
+              colorMode.value === 'light' ? 'dark' : 'light'
+          "
+        >
+          <Sun class="theme-icon-sun" :size="17" aria-hidden="true" />
+          <Moon class="theme-icon-moon" :size="17" aria-hidden="true" />
+        </UiButton>
 
         <UiButton
           variant="ghost"
