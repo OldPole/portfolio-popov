@@ -60,8 +60,8 @@
     "overview": "About the project",
     "implementation": "How I built it",
     "gallery": "Screenshots",
-    "openOriginal": "Open original",
-    "readme": "Read the project README"
+    "previousScreenshot": "Previous screenshot",
+    "nextScreenshot": "Next screenshot"
   },
   "contact": {
     "title": "Contact",

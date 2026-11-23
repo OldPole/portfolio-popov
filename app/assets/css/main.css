@@ -230,17 +230,20 @@ img {
 }
 
 .site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 36px;
   position: sticky;
   top: 0;
   z-index: 30;
   background: var(--header);
   backdrop-filter: blur(16px);
-  padding: var(--space-5) var(--space-10);
   border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding-block: var(--space-5);
 }
 
 .wordmark {
@@ -810,6 +813,14 @@ img {
   line-height: var(--leading-copy);
 }
 
+.contact-form :focus-visible {
+  outline-color: var(--muted);
+}
+
+.form-field :is(input, textarea):focus {
+  border-color: var(--subtle);
+}
+
 .form-field input {
   min-height: 45px;
 }
@@ -1050,8 +1061,8 @@ img {
     width: calc(100% - 48px);
   }
 
-  .site-header {
-    padding: var(--space-4) var(--space-6);
+  .header-inner {
+    padding-block: var(--space-4);
     gap: var(--space-5);
   }
 
@@ -1171,10 +1182,6 @@ img {
     width: calc(100% - 40px);
   }
 
-  .site-header {
-    padding: var(--space-4) var(--space-5);
-  }
-
   .wordmark {
     font-size: 19px;
   }
@@ -1197,17 +1204,21 @@ img {
   }
 
   .mobile-nav {
-    display: flex;
-    flex-direction: column;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
-    padding: var(--space-3) var(--space-5) var(--space-6);
-    gap: var(--space-1);
+    padding-block: var(--space-3) var(--space-6);
     box-shadow: 0 15px 20px var(--color-shadow);
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
   .mobile-nav a {
@@ -1478,10 +1489,6 @@ img {
   color: var(--muted);
 }
 
-.project-readme {
-  margin-top: var(--space-6);
-}
-
 .project-screenshot {
   width: 100%;
   max-width: var(--screenshot-width);
@@ -1504,19 +1511,78 @@ img {
 }
 
 .screenshot-caption {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-2) var(--space-5);
-  padding-block: 10px;
+  padding-block: var(--space-2);
   font-size: var(--text-small);
   color: var(--muted);
 }
 
-.project-gallery-grid {
-  display: grid;
-  gap: var(--space-10);
+.project-gallery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.project-gallery-header h2 {
+  margin-bottom: 0;
+}
+
+.project-gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.project-gallery-position {
+  min-width: 4ch;
+  text-align: center;
+  font-size: var(--text-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.project-gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--subtle) var(--surface);
+  border-radius: var(--radius-card);
+}
+
+.project-gallery-track:focus-visible {
+  outline: 2px solid var(--muted);
+  outline-offset: var(--space-1);
+}
+
+.project-gallery-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.project-gallery-slide .project-screenshot {
+  max-width: none;
+}
+
+.project-gallery-slide .screenshot-frame {
+  aspect-ratio: 16 / 10;
+}
+
+.project-gallery-slide img {
+  max-width: var(--screenshot-width);
+  height: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-gallery-track {
+    scroll-behavior: auto;
+  }
 }
 
 @media (max-width: 800px) {
@@ -1542,10 +1608,6 @@ img {
     margin-bottom: var(--space-12);
   }
 
-  .project-gallery-grid {
-    gap: 26px;
-  }
-
   .footer-main {
     grid-template-columns: 1fr;
   }
@@ -1553,16 +1615,11 @@ img {
   .footer-links a {
     overflow-wrap: anywhere;
   }
-
-  .cv-strip {
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
 }
 
 @media (max-width: 380px) {
-  .site-header {
-    padding: 14px var(--space-3);
+  .header-inner {
+    padding-block: 14px;
     gap: var(--space-2);
   }
 

@@ -124,29 +124,12 @@ usePortfolioSeo({
           <p>{{ detail.body }}</p>
         </article>
       </div>
-
-      <UiButton
-        :href="`${project.repository}#readme`"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="text"
-        size="small"
-        class="project-readme"
-      >
-        {{ t('projects.readme') }}
-        <ArrowUpRight :size="14" aria-hidden="true" />
-      </UiButton>
     </section>
 
-    <section class="project-gallery" aria-labelledby="gallery-title">
-      <h2 id="gallery-title">{{ t('projects.gallery') }}</h2>
-      <div class="project-gallery-grid">
-        <ProjectsScreenshot
-          v-for="image in project.gallery"
-          :key="image.src"
-          :image="image"
-        />
-      </div>
-    </section>
+    <ProjectsGallery
+      v-if="project.gallery.length"
+      :key="project.slug"
+      :images="project.gallery"
+    />
   </div>
 </template>
